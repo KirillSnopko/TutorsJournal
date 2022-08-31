@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Журнал</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--<link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>-->
+
+
+    <style>
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+            background-color: #212529 !important;
+        }
+
+        /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+        .row.content {
+            height: 100%
+        }
+
+        /* Set gray background color and 100% height */
+        .sidenav {
+            padding-top: 20px;
+            background-color: #f1f1f1;
+            height: 100%;
+        }
+
+        /* Set black background color, white text and some padding */
+        footer {
+            background-color: #555;
+            color: white;
+            padding: 15px;
+        }
+
+        /* On small screens, set height to 'auto' for sidenav and grid */
+        @media screen and (max-width: 767px) {
+            .sidenav {
+                height: auto;
+                padding: 15px;
+            }
+
+            .row.content {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark bg-dark ">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                Журнал
+            </a>
+            <div class="btn-group dropstart d-flex">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item position-relative" href="#">
+                            Ученики
+                            <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item position-relative" href="#">
+                            Предметы
+                            <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill bg-danger">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                    <li><a class="dropdown-item" href="#">План занятий</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid text-center">
+        <div class="row content">
+            <div class="col-sm-2 sidenav">
+
+            </div>
+
+
+            <div class="col-sm-8 text-left ">
+
+                <br />
+                <button type="button" class="btn btn-success float-start" data-toggle="modal" data-target="#create">Добавить предмет</button>
+                <br /> <br />
+                <div class="card text-center">
+                    <div class="card-header">
+                        <ul class="nav nav-pills card-header-pills">
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-outline-primary">Добавить ученика</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-outline-primary">Добавить класс</button>
+                            </li>
+                            <li class="nav-item">
+                                <button type="button" class="btn btn-outline-primary">Left</button>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Название предмета</h5>
+
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Количество тем
+                                <span class="badge bg-primary rounded-pill">14</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Количество учеников
+                                <span class="badge bg-primary rounded-pill">2</span>
+                            </li>
+
+                        </ul>
+
+                        <span class="badge rounded-pill bg-primary">1 класс</span>
+                        <span class="badge rounded-pill bg-primary">3 класс</span>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-2 sidenav">
+
+            </div>
+        </div>
+    </div>
+
+    <button data-bs-toggle="collapse" data-bs-target="#demo">Collapsible</button>
+
+    <div id="demo" class="collapse">
+        Lorem ipsum dolor text....
+    </div>
+
+</body>
+</html>
