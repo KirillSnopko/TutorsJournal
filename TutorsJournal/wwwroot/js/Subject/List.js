@@ -85,13 +85,13 @@
 
         function subjectSettings(id) {
             return '<li class="nav-item">' +
-                '<button type="button" class="btn btn-outline-success add_top" data-bs-toggle="modal" data-bs-target="#create_topic" id="create_topic_button" data-value = "' + id + '" >Добавить тему</button>' +
+                '<button type="button" class="btn btn-outline-success add_top" data-bs-toggle="modal" data-bs-target="#create_topic"  data-value = "' + id + '" >Добавить тему</button>' +
                 '</li>' +
                 '<li class="nav-item">' +
-                '<button type="button" class="btn btn-outline-warning ren_sub" data-bs-toggle="modal" data-bs-target="#subject_rename" id="rename_button_subject" data-value = "' + id + '" >Переименовать</button>' +
+                '<button type="button" class="btn btn-outline-warning ren_sub" data-bs-toggle="modal" data-bs-target="#subject_rename"  data-value = "' + id + '" >Переименовать</button>' +
                 '</li>' +
                 '<li class="nav-item">' +
-                '<button type="button" class="btn btn-outline-danger del_sub" data-bs-toggle="modal" data-bs-target="#subject_delete" id="delete_button_subject" data-value = "' + id + '" >Удалить</button>' +
+                '<button type="button" class="btn btn-outline-danger del_sub" data-bs-toggle="modal" data-bs-target="#subject_delete"  data-value = "' + id + '" >Удалить</button>' +
                 '</li>';
         }
 
@@ -121,8 +121,8 @@
                 description +
                 ' </button>' +
                 '<div class="dropdown-menu" aria-labelledby="dropdownMenuButton' + id + '">' +
-                '<a class="dropdown-item chan_top" href="#" data-bs-toggle="modal" data-bs-target="#change_topic" id="topic_change_id" data-value = "' + id + '" >Изменить тему</a>' +
-                '<a class="dropdown-item del_top" href="#" data-bs-toggle="modal" data-bs-target="#delete_topic" id="topic_delete_id" data-value = "' + id + '" >Удалить</a>' +
+                '<a class="dropdown-item chan_top" href="#" data-bs-toggle="modal" data-bs-target="#change_topic" data-value = "' + id + '" >Изменить тему</a>' +
+                '<a class="dropdown-item del_top" href="#" data-bs-toggle="modal" data-bs-target="#delete_topic"  data-value = "' + id + '" >Удалить</a>' +
                 ' </div>' +
                 '</div></li>';
         }

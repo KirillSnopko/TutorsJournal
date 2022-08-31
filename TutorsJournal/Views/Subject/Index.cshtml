@@ -8,6 +8,205 @@
 <button type="button" class="btn btn-success float-start" data-bs-toggle="modal" data-bs-target="#create_subject">Добавить предмет</button>
 <br />
 <br />
+
+<div id="subjects"></div>
+
+
+<!-- Create subject -->
+<div class="modal fade" id="create_subject">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Новый предмет</h4>
+            </div>
+            <div class="modal-body">
+                <form name="create" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <!--Name-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Название</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" name="name">
+                    </div>
+                    <div id="err_create_subject" class="bg-danger"></div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Создать" class="btn btn-success" id="button_create_subject" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete subject -->
+<div class="modal fade " id="subject_delete">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <strong class="modal-title">Подтвердите действие</strong>
+                <p id="err_delete_subject" class="bg-danger"></p>
+            </div>
+            <div class="modal-body">
+                <form name="delete_subject" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="idSubject_delete" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Подтвердить" class="btn btn-danger" id="form_delete_subject" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Rename subject-->
+<div class="modal fade" id="subject_rename">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Новое имя</h4>
+                <p id="err_rename_subject" class="bg-danger"></p>
+            </div>
+            <div class="modal-body">
+                <form name="rename_subject" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="idSubject_rename" />
+                    <!--new name-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Имя</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" name="name" id="new_name">
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="submit" value="Сохранить" class="btn btn-success" id="form_rename_subject" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Create topic-->
+<div class="modal fade" id="create_topic">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Новая тема</h4>
+                <p id="err_create_topic" class="bg-danger"></p>
+            </div>
+            <div class="modal-body">
+                <form name="create_topic" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="idSubject_top" />
+                    <!--gradelevel-->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Класс</span>
+                        <input type="text" class="form-control" placeholder="" name="gradeLevel" required>
+                        <span class="input-group-text">1-11</span>
+                    </div>
+
+                    <!--description-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Описание</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="description" required></textarea>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Создать" class="btn btn-success" id="form_create_topic" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete topic -->
+<div class="modal fade" id="delete_topic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete_topic" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <strong class="modal-title">Подтвердите действие</strong>
+                <p id="err_delete_subject" class="bg-danger"></p>
+            </div>
+            <div class="modal-body">
+                <form name="delete_topic" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="idTopic_delete" />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Подтвердить" class="btn btn-danger" id="form_delete_topic" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change topic-->
+<div class="modal fade" id="change_topic">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Изменить</h4>
+                <p id="err_change_topic" class="bg-danger"></p>
+            </div>
+            <div class="modal-body">
+                <form name="change_topic" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="idTopic_change" />
+                    <!--gradelevel-->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Класс</span>
+                        <input type="text" class="form-control" placeholder="" name="gradeLevel" id="cur_grad">
+                        <span class="input-group-text">1-11</span>
+                    </div>
+
+                    <!--description-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Описание</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="description" id="cur_desc"></textarea>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Изменить" class="btn btn-success" id="form_change_topic" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts
     {
     <script src="~/js/Subject/List.js"></script>
@@ -18,202 +217,3 @@
     <script src="~/js/Topic/CreateTopic.js"></script>
     <script src="~/js/Topic/DeleteTopic.js"></script>
 }
-<div id="subjects"></div>
-
-
-    <!-- Create subject -->
-    <div class="modal" id="create_subject">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Новый предмет</h4>
-                </div>
-                <div class="modal-body">
-                    <form name="create" action="#" method="post" onsubmit="return false">
-                        @Html.AntiForgeryToken()
-                        <!--Name-->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Название</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="" name="name">
-                        </div>
-                        <div id="err_create_subject" class="bg-danger"></div>
-                        <br />
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10" style="display: flex;">
-                                <input type="button" value="Создать" class="btn btn-success" id="button_create_subject" />
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete subject -->
-    <div class="modal fade" id="subject_delete" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <strong class="modal-title">Подтвердите действие</strong>
-                    <p id="err_delete_subject" class="bg-danger"></p>
-                </div>
-                <div class="modal-body">
-                    <form name="delete_subject" action="#" method="post" onsubmit="return false">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" id="idSubject_delete" />
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10" style="display: flex;">
-                                <input type="button" value="Подтвердить" class="btn btn-danger" id="form_delete_subject" />
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Rename subject-->
-    <div class="modal fade" id="subject_rename" role="dialog">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Новое имя</h4>
-                    <p id="err_rename_subject" class="bg-danger"></p>
-                </div>
-                <div class="modal-body">
-                    <form name="rename_subject" action="#" method="post" onsubmit="return false">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" id="idSubject_rename" />
-                        <!--new name-->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Имя</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="" name="name" id="new_name">
-                        </div>
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10" style="display: flex;">
-                                <input type="submit" value="Сохранить" class="btn btn-success" id="form_rename_subject" />
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Create topic-->
-    <div class="modal fade" id="create_topic" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h4 class="modal-title">Новая тема</h4>
-                    <p id="err_create_topic" class="bg-danger"></p>
-                </div>
-                <div class="modal-body">
-                    <form name="create_topic" action="#" method="post" onsubmit="return false">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" id="idSubject_top" />
-                        <!--gradelevel-->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">Класс</span>
-                            <input type="text" class="form-control" placeholder="" name="gradeLevel" required>
-                            <span class="input-group-text">1-11</span>
-                        </div>
-
-                        <!--description-->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Описание</span>
-                            </div>
-                            <textarea type="text" class="form-control" placeholder="" name="description" required></textarea>
-                        </div>
-                        <br />
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10" style="display: flex;">
-                                <input type="button" value="Создать" class="btn btn-success" id="form_create_topic" />
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer" id="operation_footer">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Delete topic -->
-    <div class="modal fade" id="delete_topic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete_topic" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <strong class="modal-title">Подтвердите действие</strong>
-                    <p id="err_delete_subject" class="bg-danger"></p>
-                </div>
-                <div class="modal-body">
-                    <form name="delete_topic" action="#" method="post" onsubmit="return false">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" id="idTopic_delete" />
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10" style="display: flex;">
-                                <input type="button" value="Подтвердить" class="btn btn-danger" id="form_delete_topic" />
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Change topic-->
-    <div class="modal fade" id="change_topic" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h4 class="modal-title">Изменить</h4>
-                    <p id="err_change_topic" class="bg-danger"></p>
-                </div>
-                <div class="modal-body">
-                    <form name="change_topic" action="#" method="post" onsubmit="return false">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="id" id="idTopic_change" />
-                        <!--gradelevel-->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">Класс</span>
-                            <input type="text" class="form-control" placeholder="" name="gradeLevel" id="cur_grad">
-                            <span class="input-group-text">1-11</span>
-                        </div>
-
-                        <!--description-->
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">Описание</span>
-                            </div>
-                            <textarea type="text" class="form-control" placeholder="" name="description" id="cur_desc"></textarea>
-                        </div>
-                        <br />
-                        <br />
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10" style="display: flex;">
-                                <input type="button" value="Изменить" class="btn btn-success" id="form_change_topic" />
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
