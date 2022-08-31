@@ -6,8 +6,8 @@ namespace TutorsJournal.Service
 {
     public class SubjectService : ISubjectService
     {
-        private ISubjectRepo subjectRepo;
-        private ITopicRepo topicRepo;
+        private readonly ISubjectRepo subjectRepo;
+        private readonly ITopicRepo topicRepo;
 
         public SubjectService(ISubjectRepo subjectRepo, ITopicRepo topicRepo)
         {
