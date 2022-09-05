@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<button type="button" class="btn btn-success float-start create_course" data-bs-toggle="modal" data-bs-target="#create_course">Добавить курс</button>
+<br />
+<br />
+
+<div id="courses"></div>
+
+<!-- Create course -->
+<div class="modal fade" id="create_course">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Новый курс</h4>
+            </div>
+            <div class="modal-body">
+                <form name="create" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <!--id-->
+                    <input type="hidden" name="id" id="idStudent" />
+                    <div id="select_subject"></div>
+                    <div id="select_grade"></div>
+
+                    <!--initPrice-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Начальная цена</span>
+                        </div>
+                        <input type="number" class="form-control" placeholder="" name="initPrice">
+                    </div>
+
+                    <!--goals-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Цели</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="goals"></textarea>
+                    </div>
+
+                    <div id="err_create_course" class="bg-danger"></div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Добавить" class="btn btn-success" id="button_create_course" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/Course/Courses.js"></script>
+    <script src="~/js/Course/CreateCourse.js"></script>
+    }

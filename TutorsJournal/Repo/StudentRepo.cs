@@ -26,7 +26,7 @@ namespace TutorsJournal.Repo
 
         public Student get(int id)
         {
-           return applicationContext.students.First(i => i.Id == id);
+            return applicationContext.students.First(i => i.Id == id);
         }
 
         public List<Student> getStudents()
@@ -36,9 +36,18 @@ namespace TutorsJournal.Repo
 
         public void update(Student student)
         {
-            Student temp = applicationContext.students.First(i => i.Id == student.Id);
-            temp = student;
-            applicationContext.SaveChanges();
+            Student current = applicationContext.students.First(i => i.Id == student.Id);
+            if (current != null)
+            {
+                current.Name = student.Name;
+                current.Age = student.Age;
+                current.GradeLevel = student.GradeLevel;
+                current.ParentName = student.ParentName;
+                current.ParentsMobile = student.ParentsMobile;
+                current.StudentMobile = student.StudentMobile;
+                current.Location = student.Location;
+                applicationContext.SaveChanges();
+            }
         }
     }
 }

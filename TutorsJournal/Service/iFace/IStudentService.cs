@@ -13,6 +13,7 @@ namespace TutorsJournal.Service.iFace
             string StudentMobile,
             string ParentsMobile);
         void updateStudent(
+            int id,
             string Name,
             int Age,
             int GradeLevel,
@@ -24,6 +25,6 @@ namespace TutorsJournal.Service.iFace
 
         void deleteStudent(int idStudent);
         Student GetStudent(int idStudent);
-        List<Student> GetAllStudents();
+        dynamic GetAllStudents();
     }
 }

@@ -14,12 +14,13 @@ namespace TutorsJournal.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Subjects");
         }
 
         public IActionResult GetSubjects()
         {
-            return Json(subjectService.getSubjects());
+            var subjects = subjectService.getSubjects();
+            return Json(subjects);
         }
 
         [HttpPost]

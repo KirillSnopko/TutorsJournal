@@ -22,9 +22,20 @@ namespace TutorsJournal.Service
             studentRepo.delete(idStudent);
         }
 
-        public List<Student> GetAllStudents()
+        public dynamic GetAllStudents()
         {
-            return studentRepo.getStudents();
+            return studentRepo.getStudents()
+                .Select(i => new
+                {
+                    id = i.Id,
+                    name = i.Name,
+                    gradeLevel = i.GradeLevel,
+                    age = i.Age,
+                    location = i.Location,
+                    parent = i.ParentName,
+                    mob1 = i.StudentMobile,
+                    mob2 = i.ParentsMobile
+                }).ToList();
         }
 
         public Student GetStudent(int idStudent)
@@ -32,9 +43,9 @@ namespace TutorsJournal.Service
             return studentRepo.get(idStudent);
         }
 
-        public void updateStudent(string Name, int Age, int GradeLevel, string Location, string ParentName, string StudentMobile, string ParentsMobile)
+        public void updateStudent(int id, string Name, int Age, int GradeLevel, string Location, string ParentName, string StudentMobile, string ParentsMobile)
         {
-            Student student = new Student { Name = Name, Age = Age, Location = Location, ParentName = ParentName, GradeLevel = GradeLevel, ParentsMobile = ParentsMobile, StudentMobile = StudentMobile };
+            Student student = new Student { Id = id, Name = Name, Age = Age, Location = Location, ParentName = ParentName, GradeLevel = GradeLevel, ParentsMobile = ParentsMobile, StudentMobile = StudentMobile };
             studentRepo.update(student);
         }
     }

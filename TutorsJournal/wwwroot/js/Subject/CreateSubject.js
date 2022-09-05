@@ -22,7 +22,7 @@
                         if (status['status'] == 200) {
                             location.reload();
                         } else {
-                            document.getElementById('err_create').innerHTML = "Server error" + "\nStatus: " + status['status'] + "\nMessage: " + status['message'];
+                            document.getElementById('err_create_subject').innerHTML = "Server error" + "\nStatus: " + status['status'] + "\nMessage: " + status['message'];
                         }
                     }
                 );

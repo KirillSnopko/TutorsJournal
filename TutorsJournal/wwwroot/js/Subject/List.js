@@ -59,7 +59,7 @@
                 //add topic
                 $(".add_top").click(function (e) {
                     var b = e.target.getAttribute('data-value');
-                    console.log('add:' +b);
+                    console.log('add:' + b);
                     $('#idSubject_top').val(b);
                 });
 
@@ -96,25 +96,6 @@
         }
 
 
-        function topic(topics) {
-            var topicView = ul1
-            var temp = new Map();
-
-            const groupByGradLevel = topics.reduce((group, topic) => {
-                const { gradeLevel } = topic;
-                group[gradeLevel] = group[gradeLevel] ?? [];
-                group[gradeLevel].push(topic);
-                temp.set(gradeLevel, group[gradeLevel]);
-                return group;
-            }, {});
-
-
-            temp.forEach((value, key) => { topicView += card_body3(key, value); })
-            topicView += ul2;
-
-            return topicView;
-        }
-
         function topicSettings(id, description) {
             return li + '<div class="dropdown">' +
                 '<button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton' + id + ' " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
@@ -138,9 +119,5 @@
                 key + 'класс' +
                 ' <span class="badge bg-danger">' + value.length + '</span></button></li>' + '<div id="topic' + key + '" class="collapse">' + ul1 + str + ul2 + '</div>';
         }
-
-
-
-
     });
 });

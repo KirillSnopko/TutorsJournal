@@ -1,0 +1,170 @@
+﻿@{
+    ViewData["Title"] = "Ученики";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ученики</h1>
+
+<br />
+<button type="button" class="btn btn-success float-start create_course" data-bs-toggle="modal" data-bs-target="#create_student">Добавить ученика</button>
+<br />
+<br />
+
+<div id="students"></div>
+
+<!-- Create student -->
+<div class="modal fade" id="create_student">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Новый ученик</h4>
+            </div>
+            <div class="modal-body">
+                <form name="create" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <!--name-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Имя</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" name="name">
+                    </div>
+                      <!--age-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Возраст</span>
+                        </div>
+                        <input type="number" class="form-control" placeholder="" name="age">
+                    </div>
+                      <!--gradeLevel-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Класс</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" name="gradeLevel">
+                    </div>
+                      <!--location-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Местоположение</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" name="location">
+                    </div>
+                      <!--parentName-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">ИО</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="ИО родителя" name="parentName">
+                    </div>
+                      <!--studentMobile-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Мобильный</span>
+                        </div>
+                        <input type="tel" class="form-control" placeholder="ученик" name="studentMobile">
+                    </div>
+                      <!--parentMobile-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Мобильный</span>
+                        </div>
+                        <input type="tel" class="form-control" placeholder="родитель" name="parentMobile">
+                    </div>
+                    <div id="err_create_student" class="bg-danger"></div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Добавить" class="btn btn-success" id="button_create_student" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Change student -->
+    <div class="modal fade" id="change_student">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Редактировать данные</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="change" action="#" method="post" onsubmit="return false">
+                        @Html.AntiForgeryToken()
+                        <!--id    idStudent_change-->
+                        <input type="hidden" name="id" id="idStudent_change" />
+                        <!--name  cur_name-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Имя</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="" name="name" id="cur_name">
+                        </div>
+                        <!--age  cur_age-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Возраст</span>
+                            </div>
+                            <input type="number" class="form-control" placeholder="" name="age" id="cur_age">
+                        </div>
+                        <!--gradeLevel  cur_grade-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Класс</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="" name="gradeLevel" id="cur_grade">
+                        </div>
+                        <!--location  cur_location-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Местоположение</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="" name="location" id="cur_location">
+                        </div>
+                        <!--parentName  cur_parent-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">ИО</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="ИО родителя" name="parentName" id="cur_parent">
+                        </div>
+                        <!--studentMobile  cur_mob1-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Мобильный</span>
+                            </div>
+                            <input type="tel" class="form-control" placeholder="ученик" name="studentMobile" id="cur_mob1">
+                        </div>
+                        <!--parentMobile  cur_mob2-->
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Мобильный</span>
+                            </div>
+                            <input type="tel" class="form-control" placeholder="родитель" name="parentMobile" id="cur_mob2">
+                        </div>
+                        <div id="err_change_student" class="bg-danger"></div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                                <input type="button" value="Сохранить" class="btn btn-success" id="button_change_student" />
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts{
+    <script src="~/js/Student/Table.js"></script>
+    <script src="~/js/Student/CreateStudent.js"></script>
+     <script src="~/js/Student/ChangeStudent.js"></script>
+    }
+

@@ -8,14 +8,22 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
 
+#region Repositories
 builder.Services.AddTransient<ISubjectRepo, SubjectRepo>();
 builder.Services.AddTransient<ITopicRepo, TopicRepo>();
+builder.Services.AddTransient<IStudentRepo, StudentRepo>();
+builder.Services.AddTransient<ICourseRepo, CourseRepo>();
+#endregion
 
+#region Services
 builder.Services.AddScoped<ISubjectService, SubjectService>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ICourseService, CourceService>();
+#endregion
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers().AddJsonOptions(x =>
