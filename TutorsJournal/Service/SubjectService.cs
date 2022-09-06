@@ -8,11 +8,14 @@ namespace TutorsJournal.Service
     {
         private readonly ISubjectRepo subjectRepo;
         private readonly ITopicRepo topicRepo;
+        private readonly ICourseRepo courseRepo;
 
-        public SubjectService(ISubjectRepo subjectRepo, ITopicRepo topicRepo)
+
+        public SubjectService(ISubjectRepo subjectRepo, ITopicRepo topicRepo, ICourseRepo courseRepo)
         {
             this.subjectRepo = subjectRepo;
             this.topicRepo = topicRepo;
+            this.courseRepo = courseRepo;
         }
 
         public void addSubject(string name)
@@ -58,5 +61,13 @@ namespace TutorsJournal.Service
         {
             subjectRepo.rename(id, name);
         }
+
+        public dynamic getTopics(int subjectId, int gradeLevel)
+        {
+            var topics = subjectRepo.getById(subjectId).topics.Where(i => i.GradeLevel == gradeLevel).ToList();
+            return new { topics = topics };
+        }
+
+
     }
 }

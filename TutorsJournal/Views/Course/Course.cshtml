@@ -56,8 +56,232 @@
     </div>
 </div>
 
+<!-- Create lesson -->
+<div class="modal fade" id="create_lesson">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Новый урок</h4>
+            </div>
+            <div class="modal-body">
+                <form name="create_lesson" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" id="idCourse" />
+                    <div id="select_topic"></div>
+                    <input class="form-control" type="text" placeholder="" id="cur_price" name="price" disabled>
+
+                    <!--task-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Задание</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="task"></textarea>
+                    </div>
+                    <!--date-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Дата</span>
+                        </div>
+                        <input type="date" class="form-control" placeholder="" name="date" data-date-format="mm/dd/yyyy ">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Время</span>
+                        </div>
+                        <input type="time" class="form-control" placeholder="" name="time">
+                    </div>
+                    <!--comment-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Комментарий</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="comment"></textarea>
+                    </div>
+
+                    <div id="err_create_lesson" class="bg-danger"></div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Добавить" class="btn btn-success" id="button_create_lesson" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- edit course -->
+<div class="modal fade" id="course_edit">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Редактировать данные</h4>
+            </div>
+            <div class="modal-body">
+                <form name="edit_course" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <!--id  idCouse_edit-->
+                    <input type="hidden" name="id" />
+                    <!--price  cur_price-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Цена</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" name="price">
+                    </div>
+
+                    <!--goals  cur_goal-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Цель</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="" name="goal">
+                    </div>
+                    <div id="err_edit_course" class="bg-danger"></div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Сохранить" class="btn btn-success" id="button_edit_course" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--delete course-->
+<div class="modal fade " id="course_delete">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong class="modal-title">Подтвердите действие</strong>
+            </div>
+            <div class="modal-body">
+                <form name="delete_course" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" />
+                    <p id="err_delete_course" class="bg-danger"></p>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Подтвердить" class="btn btn-danger" id="form_delete_course" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--edit lesson-->
+<div class="modal fade" id="edit_lesson">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Редактировать данные</h4>
+            </div>
+            <div class="modal-body">
+                <form name="edit_lesson" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" />
+                    <!--task-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Задание</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="task" id="les_task"></textarea>
+                    </div>
+                    <!--date-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Дата</span>
+                        </div>
+                        <input type="date" class="form-control" placeholder="" name="date">
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Время</span>
+                        </div>
+                        <input type="time" class="form-control" placeholder="" name="time">
+                    </div>
+                    <!--comment-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Комментарий</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="comment"></textarea>
+                    </div>
+
+                    <div id="err_edit_lesson" class="bg-danger"></div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Добавить" class="btn btn-success" id="button_edit_lesson" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--evaluate lesson-->
+<div class="modal fade" id="evaluate_lesson">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Указать релультат</h4>
+            </div>
+            <div class="modal-body">
+                <form name="evaluate" action="#" method="post" onsubmit="return false">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="id" />
+                    <!--rating-->
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">%</span>
+                        <input type="number" class="form-control" placeholder="" name="rating">
+                        <span class="input-group-text">0-100</span>
+                    </div>
+                    <!--comment-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Комментарий</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="comment"></textarea>
+                    </div>
+                    <div id="err_evaluate" class="bg-danger"></div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <input type="button" value="Оценить" class="btn btn-success" id="button_evaluate" />
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts{
     <script src="~/js/Course/Courses.js"></script>
+    <script src="~/js/Course/DeleteCourse.js"></script>
     <script src="~/js/Course/CreateCourse.js"></script>
+    <script src="~/js/Course/EditCourse.js"></script>
+    <script src="~/js/Lesson/CreateLesson.js"></script>
+    <script src="~/js/Lesson/EditLesson.js"></script>
+    <script src="~/js/Lesson/Evaluate.js"></script>
     }

@@ -37,6 +37,12 @@ namespace TutorsJournal.Controllers
             studentService.updateStudent(id, name, age, gradeLevel, location, parentName, studentMobile, parentMobile);
             return Json(new { status = "200" });
         }
-    
+
+        [HttpPost]
+        public IActionResult DeleteStudent(int id)
+        {
+            studentService.deleteStudent(id);
+            return Json(new { status = "200" });
+        }
     }
 }

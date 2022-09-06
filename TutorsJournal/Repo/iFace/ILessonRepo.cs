@@ -8,8 +8,9 @@ namespace TutorsJournal.Repo.iFace
         void delete(Lesson lesson);
         void update(Lesson lesson);
         Lesson get(int LessonId);
-        List<Lesson> getByIdStudent(int StudentId);
         void addTask(int IdLesson, string Task);
-        void EvaluateTask(int IdLesson, int PercentOfDecision);
+        void EvaluateTask(int IdLesson, int PercentOfDecision, string comment);
+        void close(int id);
+        void cancel(int id);
     }
 }

@@ -65,5 +65,12 @@ namespace TutorsJournal.Controllers
             subjectService.deleteTopic(id);
             return Json(new { status = 200 });
         }
+
+        
+        public IActionResult GetTopics(int idSubject, int grade)
+        {
+            var result = subjectService.getTopics(idSubject, grade);
+            return Json(result);
+        }
     }
 }

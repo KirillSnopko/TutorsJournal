@@ -13,7 +13,6 @@ namespace TutorsJournal.database
         public ApplicationContext(DbContextOptions<ApplicationContext> options)
             : base(options)
         {
-            
             Database.EnsureCreated();
         }
 

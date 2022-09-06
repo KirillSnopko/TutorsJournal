@@ -31,8 +31,6 @@ namespace TutorsJournal.Repo
             Course current = applicationContext.courses.First(i => i.Id == course.Id);
             if (current != null)
             {
-                current.SubjectId = course.SubjectId;
-                current.GradeLevel = course.GradeLevel;
                 current.InitPrice = course.InitPrice;
                 current.Goals = course.Goals;
                 applicationContext.SaveChanges();
@@ -46,7 +44,7 @@ namespace TutorsJournal.Repo
 
         public List<Course> GetCourses(int idStudent)
         {
-            return applicationContext.courses.Where(i => i.StudentId == idStudent).Include(i=>i.Subject).Include(i=>i.Lessons).ToList();
+            return applicationContext.courses.Where(i => i.StudentId == idStudent).Include(i => i.Subject).Include(i => i.Lessons).ToList();
         }
     }
 }

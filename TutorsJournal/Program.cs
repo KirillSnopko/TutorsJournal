@@ -10,13 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DockerDatabase")));
 
 #region Repositories
 builder.Services.AddTransient<ISubjectRepo, SubjectRepo>();
 builder.Services.AddTransient<ITopicRepo, TopicRepo>();
 builder.Services.AddTransient<IStudentRepo, StudentRepo>();
 builder.Services.AddTransient<ICourseRepo, CourseRepo>();
+builder.Services.AddTransient<ILessonRepo, LessonRepo>();
 #endregion
 
 #region Services

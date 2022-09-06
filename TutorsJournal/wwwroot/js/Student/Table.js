@@ -37,15 +37,11 @@
                     $('#cur_mob2').val(student.mob2);
                 });
 
+                $(".delete").click(function (e) {
+                    var b = e.target.getAttribute('data-value');
+                    $('input[name="id"]', delete_student).val(b);
+                });
 
-                //$(".delete").click(function (e) {
-                //    var b = e.target.getAttribute('data-value');
-                //    $('#idCredit_delete').val(b);
-                //});
-                //$(".reduce").click(function (e) {
-                //    var b = e.target.getAttribute('data-value');
-                //    $('#idCredit_reduce').val(b);
-                //});
                 //$(".history").click(function (e) {
                 //    var b = e.target.getAttribute('data-value');
 
@@ -69,8 +65,17 @@
         );
 
         function button(id) {
-            return '<a href="/Course?idStudent=' + id + '" class = "btn btn-info" >Курсы</a>' +
-                '<button type="button" class="btn btn-warning change" data-bs-toggle="modal" data-bs-target="#change_student" data-value = "' + id + '">Изменить</button>';
+
+            return '<div class="dropdown">' +
+                '<button class="btn btn-outline-info dropdown-toggle" type="button" id="settings_student' + id + '" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
+                'Настройки' +
+                '</button>' +
+                '<ul class="dropdown-menu" aria-labelledby="settings_student' + id + '">' +
+                '<li><a class="dropdown-item" href="/Course?idStudent=' + id + '">Курсы</a></li>' +
+                ' <li><a class="dropdown-item change" href="#" data-bs-toggle="modal" data-bs-target="#change_student"  data-value = "' + id + '">Изменить</a></li>' +
+                '<li><a class="dropdown-item delete" href="#" data-bs-toggle="modal" data-bs-target="#student_delete"  data-value = "' + id + '">Удалить</a></li>' +
+                '</ul>' +
+                '</div>';
         }
 
     });

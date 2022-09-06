@@ -5,18 +5,20 @@
     {
       "library": "bootstrap@5.2.0",
       "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "popper.js@2.11.6",
+      "destination": "wwwroot/lib/popper.js/",
+      "files": [
+        "umd/popper.min.js",
+        "umd/popper.min.js.map",
+        "umd/popper.js.map",
+        "umd/popper.js"
+      ]
+    },
+    {
+      "library": "moment.js@2.29.4",
+      "destination": "wwwroot/lib/moment.js/"
     }
-  ,
-{
-  "provider": "cdnjs",
-  "library": "popper.js@2.11.6",
-  "destination": "wwwroot/lib/popper.js/",
-  "files": [
-    "umd/popper.min.js",
-    "umd/popper.min.js.map",
-    "umd/popper.js.map",
-    "umd/popper.js"
   ]
-}
-]
 }

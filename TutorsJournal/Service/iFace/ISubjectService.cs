@@ -5,13 +5,13 @@ namespace TutorsJournal.Service.iFace
     public interface ISubjectService
     {
         List<Subject> getSubjects();
-        public Subject getById(int id);
-        public void deleteSubject(int id);
-        public void addSubject(string name);
-        public void renameSubject(int id, string name);
-
-        public void deleteTopic(int id);
-        public void changeTopic(int id, int gradeLevel, string description);
-        public void createTopic(int idSubject, int gradeLevel, string description);
+        Subject getById(int id);
+        void deleteSubject(int id);
+        void addSubject(string name);
+        void renameSubject(int id, string name);
+        void deleteTopic(int id);
+        void changeTopic(int id, int gradeLevel, string description);
+        void createTopic(int idSubject, int gradeLevel, string description);
+        dynamic getTopics(int subjectId, int gradeLevel);
     }
 }

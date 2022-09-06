@@ -16,7 +16,7 @@
                 document.getElementById('err_create_course').innerHTML = "Выберите класс либо создайте";
                 grade.focus();
             } else if (isNaN(parseInt(initPrice.value)) || initPrice.value < 0 || initPrice.value.trim() == "") {
-                document.getElementById('err_create_course').innerHTML = "Введите корректно значение цены";
+                document.getElementById('err_create_course').innerHTML = "Введите корректное значение цены";
                 initPrice.focus();
             } else if (goals.value.trim() == "" || goals.value == null) {
                 document.getElementById('err_create_course').innerHTML = "Введите цель";

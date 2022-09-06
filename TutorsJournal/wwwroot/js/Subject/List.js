@@ -32,7 +32,7 @@
                             return group;
                         }, {});
 
-                        temp.forEach((value, key) => { topicView += card_body3(key, value); })
+                        temp.forEach((value, key) => { topicView += card_body3(key, value); });
                         topicView += ul2;
                         content += topicView;
                     }

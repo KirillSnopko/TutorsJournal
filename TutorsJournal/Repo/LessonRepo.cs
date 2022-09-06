@@ -4,7 +4,7 @@ using TutorsJournal.Repo.iFace;
 
 namespace TutorsJournal.Repo
 {
-    public class LessonRepo // : ILessonRepo
+    public class LessonRepo : ILessonRepo
     {
         private ApplicationContext applicationContext;
         public LessonRepo(ApplicationContext applicationContext)
@@ -15,6 +15,18 @@ namespace TutorsJournal.Repo
         public void addTask(int IdLesson, string Task)
         {
             applicationContext.lessons.First(i => i.Id == IdLesson).Task = Task;
+            applicationContext.SaveChanges();
+        }
+
+        public void cancel(int id)
+        {
+            applicationContext.lessons.First(i => i.Id == id).isCanceled = true;
+            applicationContext.SaveChanges();
+        }
+
+        public void close(int id)
+        {
+            applicationContext.lessons.First(i => i.Id == id).IsCompleted = true;
             applicationContext.SaveChanges();
         }
 
@@ -30,9 +42,11 @@ namespace TutorsJournal.Repo
             applicationContext.SaveChanges();
         }
 
-        public void EvaluateTask(int IdLesson, int PercentOfDecision)
+        public void EvaluateTask(int IdLesson, int PercentOfDecision, string comment)
         {
-            applicationContext.lessons.First(i => i.Id == IdLesson).PercentOfDecision = PercentOfDecision;
+            Lesson lesson =  applicationContext.lessons.First(i => i.Id == IdLesson);
+            lesson.PercentOfDecision = PercentOfDecision;
+            lesson.Comment += "\nОценка: " + comment;
             applicationContext.SaveChanges();
         }
 
@@ -40,15 +54,16 @@ namespace TutorsJournal.Repo
         {
             return applicationContext.lessons.First(i => i.Id == LessonId);
         }
-/*
-        public List<Lesson> getByIdStudent(int StudentId)
-        {
-            return applicationContext.lessons.Where(i=>i. .StudentId==StudentId).ToList();
-        }
-*/
+
         public void update(Lesson lesson)
         {
-            applicationContext.lessons.Update(lesson);
+            Lesson current = get(lesson.Id);
+            if (lesson != null)
+            {
+                current.Comment = lesson.Comment;
+                current.Task = lesson.Task;
+                current.Date = lesson.Date;
+            }
             applicationContext.SaveChanges();
         }
     }
