@@ -24,7 +24,8 @@
                 document.getElementById('err_create_lesson').innerHTML = "Введите время";
                 time.focus();
             } else if (comment.value == null || comment.value.trim() == "") {
-                document.getElementById('err_create_lesson').innerHTML = "Введите задание";
+                document.getElementById('err_create_lesson').innerHTML = "Оставляем без комментария?";
+                $('textarea[name="comment"]', create_lesson).val("Без комментариев");
                 comment.focus();
             } else {
                 $.post("../Course/CreateLesson",
