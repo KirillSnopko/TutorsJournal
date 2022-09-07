@@ -5,7 +5,7 @@ namespace TutorsJournal.Controllers
 {
     public class SubjectController : Controller
     {
-        private ISubjectService subjectService;
+        private readonly ISubjectService subjectService;
 
         public SubjectController(ISubjectService subjectService)
         {
@@ -17,20 +17,29 @@ namespace TutorsJournal.Controllers
             return View("Subjects");
         }
 
+        [HttpGet]
         public IActionResult GetSubjects()
         {
             var subjects = subjectService.getSubjects();
             return Json(subjects);
         }
 
-        [HttpPost]
-        public IActionResult CreateSubject(string name)
+        [HttpGet]
+        public IActionResult Count()
         {
-            subjectService.addSubject(name);
-            return Json(new {status = "200" });
+            return Json(new { count = subjectService.getSubjectsCount() });
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateSubject(string name)
+        {
+            subjectService.addSubject(name);
+            return Json(new { status = "200" });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteSubject(int id)
         {
             subjectService.deleteSubject(id);
@@ -38,6 +47,7 @@ namespace TutorsJournal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult RenameSubject(int id, string name)
         {
             subjectService.renameSubject(id, name);
@@ -45,6 +55,7 @@ namespace TutorsJournal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateTopic(int idSubject, int gradeLevel, string description)
         {
             subjectService.createTopic(idSubject, gradeLevel, description);
@@ -53,6 +64,7 @@ namespace TutorsJournal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ChangeTopic(int id, int gradeLevel, string description)
         {
             subjectService.changeTopic(id, gradeLevel, description);
@@ -60,13 +72,14 @@ namespace TutorsJournal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteTopic(int id)
         {
             subjectService.deleteTopic(id);
             return Json(new { status = 200 });
         }
 
-        
+        [HttpGet]
         public IActionResult GetTopics(int idSubject, int grade)
         {
             var result = subjectService.getTopics(idSubject, grade);

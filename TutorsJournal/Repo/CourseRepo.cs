@@ -39,12 +39,12 @@ namespace TutorsJournal.Repo
 
         public Course get(int id)
         {
-            return applicationContext.courses.First(i => i.Id == id);
+            return applicationContext.courses.Include(i=>i.Lessons).Include(i => i.Subject).Include(i => i.Student).First(i => i.Id == id);
         }
 
         public List<Course> GetCourses(int idStudent)
         {
-            return applicationContext.courses.Where(i => i.StudentId == idStudent).Include(i => i.Subject).Include(i => i.Lessons).ToList();
+            return applicationContext.courses.Where(i => i.StudentId == idStudent).Include(i => i.Subject).Include(i => i.Lessons.OrderByDescending(i=>i.Date)).ToList();
         }
     }
 }

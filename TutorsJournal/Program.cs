@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DockerDatabase")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
 
 #region Repositories
 builder.Services.AddTransient<ISubjectRepo, SubjectRepo>();

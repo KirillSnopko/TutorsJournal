@@ -42,7 +42,7 @@ $(document).ready(function () {
                         var size = 0;
                         var sum = 0;
                         mapLessons.forEach((value, key) => {
-                            if (value.isCompleted && !value.isCanceled) {
+                            if (value.isEvaluated) {
                                 sum += value.percentOfDecision;
                                 size++;
                             }
@@ -126,7 +126,7 @@ $(document).ready(function () {
                     var task = lesson.task;
                     var comment = lesson.comment;
                     var dateTime = moment(lesson.date);
-                    var date = dateTime.format("DD.MM.YYYY");
+                    var date = new String(dateTime.format("YYYY-MM-DD"));
                     console.log(date);
                     var time = dateTime.format("HH:mm")
                     $('input[name="id"]', edit_lesson).val(b);
@@ -170,47 +170,10 @@ $(document).ready(function () {
                             }
                         });
                 });
-
-
-
-                ////subject delete
-                //$(".del_sub").click(function (e) {
-                //    var b = e.target.getAttribute('data-value');
-                //    $('#idSubject_delete').val(b);
-                //});
-
-                ////rename subject
-                //$(".ren_sub").click(function (e) {
-                //    var b = parseInt(e.target.getAttribute('data-value'));
-                //    name = mapSub.get(b);
-                //    $('#idSubject_rename').val(b);
-                //    $('#new_name').val(name);
-                //});
-
-                ////add topic
-                //$(".add_top").click(function (e) {
-                //    var b = e.target.getAttribute('data-value');
-                //    console.log('add:' + b);
-                //    $('#idSubject_top').val(b);
-                //});
-
-                ////delete topic
-                //$(".del_top").click(function (e) {
-                //    var b = e.target.getAttribute('data-value');
-                //    console.log('del' + b);
-                //    $('#idTopic_delete').val(b);
-                //});
-
-                ////change topic
-                //$(".chan_top").click(function (e) {
-                //    var b = parseInt(e.target.getAttribute('data-value'));
-                //    gradeLevel = mapTop.get(b).gradeLevel;
-                //    description = mapTop.get(b).description;
-                //    console.log('change:' + b + ' gl:' + gradeLevel + ' desc:' + description);
-                //    $('#cur_grad').val(gradeLevel);
-                //    $('#cur_desc').val(description);
-                //    $('#idTopic_change').val(b);
-                //});
+                $(".excel").click(function (e) {
+                    var id = parseInt(e.target.getAttribute('data-value'));
+                    window.open("/Export/Excel?idCourse=" + id);
+                });
 
             });
 
@@ -279,24 +242,30 @@ $(document).ready(function () {
                 '<button type="button" class="btn btn-outline-warning edit_course" data-bs-toggle="modal" data-bs-target="#course_edit"  data-value = "' + id + '" >Редактировать</button>' +
                 '</li>' +
                 '<li class="nav-item">' +
+                '<button type="button" class="btn btn-success excel"   data-value = "' + id + '" >Excel</button>' +
+                '</li>' +
+                '<li class="nav-item">' +
                 '<button type="button" class="btn btn-outline-danger del_course" data-bs-toggle="modal" data-bs-target="#course_delete"  data-value = "' + id + '" >Удалить</button>' +
                 '</li>';
         }
 
 
-        function lessonSettings(id, isComplited) {
+        function lessonSettings(id, isCompleted, isCanceled, isEvaluated) {
             var divDrop = '<div class="dropdown">' +
                 '<button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton' + id + ' " data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">' +
                 'Настройки </button>';
-            var but_del = '<a class="dropdown-item del_lesson" href="#" data-value = "' + id + '">Удалить</a>';
-            var but_evaluate = '<a class="dropdown-item evaluate" href="#" data-bs-toggle="modal" data-bs-target="#evaluate_lesson" data-value = "' + id + '">Оценить</a>';
-            var but_close = '<a class="dropdown-item close" href="#" data-value = "' + id + '">Закрыть</a>';
-            var but_cancel = '<a class="dropdown-item cancel" href="#" data-value = "' + id + '">Отменить</a>';
-            var but_edit = '<a class="dropdown-item edit_lesson" href="#" data-bs-toggle="modal" data-bs-target="#edit_lesson" data-value = "' + id + '" >Редактировать</a>';
+            var but_del = '<a class="dropdown-item del_lesson"  data-value = "' + id + '">Удалить</a>';
+            var but_evaluate = '<a class="dropdown-item evaluate" " data-bs-toggle="modal" data-bs-target="#evaluate_lesson" data-value = "' + id + '">Оценить</a>';
+            var but_close = '<a class="dropdown-item close" data-value = "' + id + '">Закрыть</a>';
+            var but_cancel = '<a class="dropdown-item cancel"  data-value = "' + id + '">Отменить</a>';
+            var but_edit = '<a class="dropdown-item edit_lesson"  data-bs-toggle="modal" data-bs-target="#edit_lesson" data-value = "' + id + '" >Редактировать</a>';
             var ul_1 = ' <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton' + id + '">';
             var ul_2 = '</ul>';
 
-            if (isComplited) {
+            if (isCanceled || isEvaluated) {
+                return divDrop + ul_1 + but_del + ul_2 + div2;
+            }
+            if (isCompleted) {
                 return divDrop + ul_1 + but_evaluate + but_del + ul_2 + div2;
             } else {
                 return divDrop + ul_1 + but_del + but_close + but_cancel + but_edit + ul_2 + div2;
@@ -326,15 +295,14 @@ $(document).ready(function () {
                 var buttons;
                 if (value.isCompleted && !value.isCanceled) {
                     str += '<tr class="table-success">';
-                    buttons = lessonSettings(key, true);
                 } else if (value.isCanceled) {
                     str += '<tr class="table-danger">';
-                    buttons = lessonSettings(key, true);
                 }
                 else {
                     str += '<tr class="table-primary">';
-                    buttons = lessonSettings(key, false);
                 }
+                console.log("isCompleted: " + value.isCompleted, 'isCanceled: ' + value.isCanceled + 'isEvaluated: ' + value.isEvaluated);
+                buttons = lessonSettings(key, value.isCompleted, value.isCanceled, value.isEvaluated)
 
                 var date = moment(value.date);
                 moment.locale('ru');

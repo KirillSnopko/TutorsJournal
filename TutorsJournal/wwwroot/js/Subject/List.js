@@ -10,6 +10,7 @@
             function (credits) {
                 mapSub = new Map();
                 mapTop = new Map();
+                var idGroup = 0;
                 $(credits).each(function (index, item) {
                     var content = '<div class="card text-center">';
                     var id = item.id;
@@ -32,7 +33,7 @@
                             return group;
                         }, {});
 
-                        temp.forEach((value, key) => { topicView += card_body3(key, value); });
+                        temp.forEach((value, key) => { topicView += card_body3(key, value, idGroup++); });
                         topicView += ul2;
                         content += topicView;
                     }
@@ -108,16 +109,16 @@
                 '</div></li>';
         }
 
-        function card_body3(key, value) {
+        function card_body3(key, value, idGroup) {
             var str = new String();
             for (let topic of value) {
                 str += (topicSettings(topic.id, topic.description));
             }
 
             return li +
-                '<button type="button" class="btn btn-primary btn-block" data-bs-toggle="collapse" data-bs-parent="#parent" data-bs-target="#topic' + key + '" aria-expanded="false" aria-controls="#topic' + key + '" >' +
+                '<button type="button" class="btn btn-primary btn-block" data-bs-toggle="collapse" data-bs-parent="#parent" data-bs-target="#topic' + idGroup + '" aria-expanded="false" aria-controls="#topic' + key + '" >' +
                 key + 'класс' +
-                ' <span class="badge bg-danger">' + value.length + '</span></button></li>' + '<div id="topic' + key + '" class="collapse">' + ul1 + str + ul2 + '</div>';
+                ' <span class="badge bg-danger">' + value.length + '</span></button></li>' + '<div id="topic' + idGroup + '" class="collapse">' + ul1 + str + ul2 + '</div>';
         }
     });
 });

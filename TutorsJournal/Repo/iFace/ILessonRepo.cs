@@ -12,5 +12,6 @@ namespace TutorsJournal.Repo.iFace
         void EvaluateTask(int IdLesson, int PercentOfDecision, string comment);
         void close(int id);
         void cancel(int id);
+        List<Lesson> getPlannedLessons();
     }
 }

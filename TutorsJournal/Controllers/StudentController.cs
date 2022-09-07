@@ -5,7 +5,7 @@ namespace TutorsJournal.Controllers
 {
     public class StudentController : Controller
     {
-        private IStudentService studentService;
+        private readonly IStudentService studentService;
 
         public StudentController(IStudentService studentService)
         {
@@ -24,7 +24,14 @@ namespace TutorsJournal.Controllers
             return Json(data);
         }
 
+        [HttpGet]
+        public IActionResult Count()
+        {
+            return Json(new { count = studentService.GetStudentCount() });
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateStudent(string name, int age, int gradeLevel, string location, string parentName, string studentMobile, string parentMobile)
         {
             studentService.createNewStudent(name, age, gradeLevel, location, parentName, studentMobile, parentMobile);
@@ -32,6 +39,7 @@ namespace TutorsJournal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult ChangeStudent(int id, string name, int age, int gradeLevel, string location, string parentName, string studentMobile, string parentMobile)
         {
             studentService.updateStudent(id, name, age, gradeLevel, location, parentName, studentMobile, parentMobile);
@@ -39,6 +47,7 @@ namespace TutorsJournal.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteStudent(int id)
         {
             studentService.deleteStudent(id);

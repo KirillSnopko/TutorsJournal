@@ -1,6 +1,8 @@
 ﻿using TutorsJournal.database;
 using TutorsJournal.entity;
 using TutorsJournal.Repo.iFace;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace TutorsJournal.Repo
 {
@@ -44,15 +46,28 @@ namespace TutorsJournal.Repo
 
         public void EvaluateTask(int IdLesson, int PercentOfDecision, string comment)
         {
-            Lesson lesson =  applicationContext.lessons.First(i => i.Id == IdLesson);
+            Lesson lesson = applicationContext.lessons.First(i => i.Id == IdLesson);
             lesson.PercentOfDecision = PercentOfDecision;
-            lesson.Comment += "\nОценка: " + comment;
+            lesson.Comment += comment;
+            lesson.isEvaluated = true;
             applicationContext.SaveChanges();
         }
 
         public Lesson get(int LessonId)
         {
             return applicationContext.lessons.First(i => i.Id == LessonId);
+        }
+
+        public List<Lesson> getPlannedLessons()
+        {
+            return applicationContext.lessons
+                .Where(i => i.Date >= DateTime.Now)
+                .Where(i => i.isCanceled == false)
+                .Where(i => i.IsCompleted == false)
+                .Include(i => i.Course)
+                .Include(i => i.Course.Student)
+                .Include(i => i.Course.Subject).OrderBy(i => i.Date)
+                .ToList();
         }
 
         public void update(Lesson lesson)

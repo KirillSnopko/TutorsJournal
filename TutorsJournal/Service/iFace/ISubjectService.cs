@@ -13,5 +13,6 @@ namespace TutorsJournal.Service.iFace
         void changeTopic(int id, int gradeLevel, string description);
         void createTopic(int idSubject, int gradeLevel, string description);
         dynamic getTopics(int subjectId, int gradeLevel);
+        int getSubjectsCount();
     }
 }

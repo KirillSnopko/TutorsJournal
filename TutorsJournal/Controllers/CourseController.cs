@@ -15,60 +15,81 @@ namespace TutorsJournal.Controllers
             return View("Course");
         }
 
+        [HttpGet]
         public IActionResult Courses(int id)
         {
             var courses = courseService.getCoursesByStudentId(id);
             return Json(courses);
         }
 
+        [HttpGet]
+        public IActionResult Schedule()
+        {
+            return Json(courseService.plannedLessons());
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateCourse(int subjectId, int studentId, int gradeLevel, int initPrice, string goals)
         {
             courseService.create(subjectId, studentId, gradeLevel, initPrice, goals);
             return Json(new { status = "200" });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult CreateLesson(int courseId, string topic, int price, string task, string comment, string date, string time)
         {
             courseService.createLesson(courseId, topic, price, task, comment, convertTime(date, time));
             return Json(new { status = "200" });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult DeleteCourse(int id)
         {
             courseService.delete(id);
             return Json(new { status = "200" });
         }
 
+        [HttpPost]
         public IActionResult DeleteLesson(int id)
         {
             courseService.deleteLesson(id);
             return Json(new { status = "200" });
         }
 
+        [HttpPost]
         public IActionResult CloseLesson(int id)
         {
             courseService.closeLesson(id);
             return Json(new { status = "200" });
         }
 
+        [HttpPost]
         public IActionResult CancelLesson(int id)
         {
             courseService.cancelLesson(id);
             return Json(new { status = "200" });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditLesson(int id, string task, string comment, string date, string time)
         {
             courseService.editLesson(id, task, comment, convertTime(date, time));
             return Json(new { status = "200" });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EditCourse(int id, int price, string goal)
         {
             courseService.edit(id, price, goal);
             return Json(new { status = "200" });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult EvaluateLesson(int id, int rating, string comment)
         {
             courseService.evaluateLesson(id, rating, comment);

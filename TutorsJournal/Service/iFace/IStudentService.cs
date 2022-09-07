@@ -26,5 +26,6 @@ namespace TutorsJournal.Service.iFace
         void deleteStudent(int idStudent);
         Student GetStudent(int idStudent);
         dynamic GetAllStudents();
+        int GetStudentCount();
     }
 }

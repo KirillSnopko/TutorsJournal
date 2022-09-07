@@ -17,5 +17,6 @@ namespace TutorsJournal.entity
         public String Comment { get; set; }
         public bool IsCompleted { get; set; } = false;
         public bool isCanceled { get; set; } = false;
+        public bool isEvaluated { get; set; } = false;
     }
 }

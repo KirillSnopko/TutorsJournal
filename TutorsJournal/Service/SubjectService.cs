@@ -8,14 +8,11 @@ namespace TutorsJournal.Service
     {
         private readonly ISubjectRepo subjectRepo;
         private readonly ITopicRepo topicRepo;
-        private readonly ICourseRepo courseRepo;
 
-
-        public SubjectService(ISubjectRepo subjectRepo, ITopicRepo topicRepo, ICourseRepo courseRepo)
+        public SubjectService(ISubjectRepo subjectRepo, ITopicRepo topicRepo)
         {
             this.subjectRepo = subjectRepo;
             this.topicRepo = topicRepo;
-            this.courseRepo = courseRepo;
         }
 
         public void addSubject(string name)
@@ -68,6 +65,9 @@ namespace TutorsJournal.Service
             return new { topics = topics };
         }
 
-
+        public int getSubjectsCount()
+        {
+            return subjectRepo.getAll().Count();
+        }
     }
 }

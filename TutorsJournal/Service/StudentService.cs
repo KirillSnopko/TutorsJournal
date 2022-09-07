@@ -43,6 +43,11 @@ namespace TutorsJournal.Service
             return studentRepo.get(idStudent);
         }
 
+        public int GetStudentCount()
+        {
+            return studentRepo.getStudents().Count();
+        }
+
         public void updateStudent(int id, string Name, int Age, int GradeLevel, string Location, string ParentName, string StudentMobile, string ParentsMobile)
         {
             Student student = new Student { Id = id, Name = Name, Age = Age, Location = Location, ParentName = ParentName, GradeLevel = GradeLevel, ParentsMobile = ParentsMobile, StudentMobile = StudentMobile };

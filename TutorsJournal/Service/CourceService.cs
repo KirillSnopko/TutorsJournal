@@ -57,7 +57,7 @@ namespace TutorsJournal.Service
                 Topic = topic,
                 Price = price,
                 Task = task,
-                Comment = comment,
+                Comment = "Создание: " + comment + ". ",
                 Date = date
             };
             lessonRepo.create(lesson);
@@ -96,7 +96,18 @@ namespace TutorsJournal.Service
 
         public void evaluateLesson(int id, int rating, string comment)
         {
-            lessonRepo.EvaluateTask(id, rating, comment);
+
+            lessonRepo.EvaluateTask(id, rating, "\nОценка: "+  comment + ". ");
+        }
+
+        public dynamic plannedLessons()
+        {
+           return lessonRepo.getPlannedLessons().Select(i=> new {date = i.Date, course = i.Course.Subject.name, student = i.Course.Student.Name, idStudent = i.Course.Student.Id}).ToList();
+        }
+
+        public Course getById(int id)
+        {
+            return courseRepo.get(id);
         }
     }
 }

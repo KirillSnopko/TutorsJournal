@@ -59,20 +59,18 @@
                         <li>
                             <a class="dropdown-item position-relative" href="~/Student/">
                                 Ученики
-                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill bg-danger">
-                                    0
+                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill bg-success" id="student_count">
                                 </span>
                             </a>
                         </li>
                         <li>
                             <a class="dropdown-item position-relative" href="/">
                                 Предметы
-                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill bg-danger">
-                                    0
+                                <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill bg-success" id="subject_count">
                                 </span>
                             </a>
                         </li>
-                        <li><a class="dropdown-item" href="#">План занятий</a></li>
+                        <li><a class="dropdown-item" href="#" id="button_schedule" data-bs-toggle="modal" data-bs-target="#lessons_schedule">План занятий</a></li>
                     </ul>
                 </div>
             </div>
@@ -88,6 +86,7 @@
             <div class="col-sm-8 text-center ">
                 @RenderBody()
 
+
             </div>
 
 
@@ -97,5 +96,26 @@
     </div>
 
     @RenderSection("Scripts", required: false)
+
+
+    <script src="~/js/Common/Counts.js"></script>
+    <script src="~/js/Common/Schedule.js"></script>
+
+
+    <div class="modal fade " id="lessons_schedule">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong class="modal-title">Расписание</strong>
+                </div>
+                <div class="modal-body">
+                    <div id="schedule"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </body>
 </html>

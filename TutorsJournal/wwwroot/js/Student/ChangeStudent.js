@@ -13,30 +13,30 @@
             var token = $('input[name="__RequestVerificationToken"]', change).val();
 
             if (name.value.trim() == "" || name.value == null) {
-                document.getElementById('err_change_student').innerHTML = "Введите корректно значение";
+                document.getElementById('err_change_student').innerHTML = "Введите имя ученика";
                 name.focus();
             } else if (isNaN(parseInt(age.value)) || age.value < 0 || age.value.trim() == "") {
-                document.getElementById('err_change_student').innerHTML = "Введите корректно значение";
+                document.getElementById('err_change_student').innerHTML = "Введите возраст";
                 age.focus();
             }
             else if (isNaN(parseInt(grade.value)) || grade.value < 0 || grade.value.trim() == "") {
-                document.getElementById('err_change_student').innerHTML = "Введите корректно значение";
+                document.getElementById('err_change_student').innerHTML = "В каком классе?";
                 grade.focus();
             }
             else if (location.value.trim() == "" || location.value == null) {
-                document.getElementById('err_change_student').innerHTML = "Введите корректно значение";
+                document.getElementById('err_change_student').innerHTML = "Введите местоположение";
                 location.focus();
             }
             else if (parName.value.trim() == "" || parName.value == null) {
-                document.getElementById('err_change_student').innerHTML = "Введите корректно значение";
+                document.getElementById('err_change_student').innerHTML = "Введите И О родителя";
                 parName.focus();
             }
             else if (studMob.value.trim() == "" || studMob.value == null) {
-                document.getElementById('err_change_student').innerHTML = "Введите корректно значение";
+                document.getElementById('err_change_student').innerHTML = "Введите мобильный ученика";
                 studMob.focus();
             }
             else if (parMob.value.trim() == "" || parMob.value == null) {
-                document.getElementById('err_change_student').innerHTML = "Введите корректно значение";
+                document.getElementById('err_change_student').innerHTML = "Введите мобильный родителей";
                 parMob.focus();
             }
             else {
