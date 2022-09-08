@@ -65,7 +65,7 @@ namespace TutorsJournal.Controllers
                     // Put a label on the totals cell of the field "DOB"
                     excelTable.Field("Дата").TotalsRowLabel = "Среднее:";
 
-                    workSheet.RangeUsed().Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+                   // workSheet.RangeUsed().Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
                     workSheet.Columns().AdjustToContents();
 
                     using (MemoryStream stream = new MemoryStream())
