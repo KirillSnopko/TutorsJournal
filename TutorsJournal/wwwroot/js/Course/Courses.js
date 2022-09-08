@@ -170,10 +170,10 @@ $(document).ready(function () {
                             }
                         });
                 });
-                $(".excel").click(function (e) {
-                    var id = parseInt(e.target.getAttribute('data-value'));
-                    window.open("/Export/Excel?idCourse=" + id);
-                });
+                //$(".excel").click(function (e) {
+                //    var id = parseInt(e.target.getAttribute('data-value'));
+                //    window.open("/Export/Excel?idCourse=" + id);
+                //});
 
             });
 
@@ -241,9 +241,9 @@ $(document).ready(function () {
                 '<li class="nav-item">' +
                 '<button type="button" class="btn btn-outline-warning edit_course" data-bs-toggle="modal" data-bs-target="#course_edit"  data-value = "' + id + '" >Редактировать</button>' +
                 '</li>' +
-                '<li class="nav-item">' +
-                '<button type="button" class="btn btn-success excel"   data-value = "' + id + '" >Excel</button>' +
-                '</li>' +
+                //'<li class="nav-item">' +
+                //'<button type="button" class="btn btn-success excel"   data-value = "' + id + '" >Excel</button>' +
+                //'</li>' +
                 '<li class="nav-item">' +
                 '<button type="button" class="btn btn-outline-danger del_course" data-bs-toggle="modal" data-bs-target="#course_delete"  data-value = "' + id + '" >Удалить</button>' +
                 '</li>';

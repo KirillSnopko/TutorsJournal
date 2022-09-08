@@ -1,13 +1,16 @@
 ﻿version: "1.0"
 services:
     web:
+        container_name: web
         build: .
+        image: kira1996/journal:v1.0.1
         ports:
             - "8000:80"
         depends_on:
             - db
     db:
         image: "mcr.microsoft.com/mssql/server:latest"
+        container_name: db
         environment:
             
             MSSQL_SA_PASSWORD: "Your_password123"
