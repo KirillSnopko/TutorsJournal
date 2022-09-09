@@ -118,7 +118,11 @@
             return li +
                 '<button type="button" class="btn btn-primary btn-block" data-bs-toggle="collapse" data-bs-parent="#parent" data-bs-target="#topic' + idGroup + '" aria-expanded="false" aria-controls="#topic' + key + '" >' +
                 key + 'класс' +
-                ' <span class="badge bg-danger">' + value.length + '</span></button></li>' + '<div id="topic' + idGroup + '" class="collapse">' + ul1 + str + ul2 + '</div>';
+                ' <span class="badge bg-danger">' + value.length + '</span></button></li>' + '<div id="topic' + idGroup + '" class="collapse">' + search(idGroup) + ul1 + str + ul2 + '</div>';
+        }
+
+        function search(idGroup) {
+            return str = '<input id="myInput' + idGroup + '" type="text" placeholder="Поиск.." class="form-control">';
         }
     });
 });
