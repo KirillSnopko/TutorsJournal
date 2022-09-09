@@ -82,6 +82,16 @@
                     $('#idTopic_change').val(b);
                 });
 
+                $("[id^='myInput']").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    var id = this.id.split('myInput')[1];
+
+
+                    $("#topic" + id + " button").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
+                });
+
             });
 
         function subjectSettings(id) {
