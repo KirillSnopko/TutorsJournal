@@ -52,7 +52,7 @@ $(document).ready(function () {
                         lessons_table = '<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#lessons' + id + '" aria-expanded="false" >Уроки<span class="badge bg-secondary">' + mapLessons.size + 'шт</span></button>';
 
                         lessons_table += '<div class="collapse" id="lessons' + id + '">';
-                        lessons_table += lessonsList(mapLessons) + div2;
+                        lessons_table += lessonsList(mapLessons, id) + div2;
                     } else {
                         lessons_table += '<p> Список уроков пуст</p>';
                     }
@@ -232,6 +232,16 @@ $(document).ready(function () {
 
                 $('#select_grade').html(selectGrade);
             });
+
+            $("[id^='myInput']").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                var id = this.id.split('myInput')[1];
+
+
+                $("#table" + id + " tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
         });
 
         function courseSettings(id, subjectId) {
@@ -272,9 +282,15 @@ $(document).ready(function () {
             }
         }
 
-        function lessonsList(lessons) {
+        function search(idCourse) {
+            return str = '<input id="myInput' + idCourse + '" type="text" placeholder="Поиск.." class="form-control">';
+        }
 
-            var str = '<table class="table">' +
+        function lessonsList(lessons, id) {
+
+            var str = search(id)
+
+            str += '<table class="table" id="table' + id + '">' +
                 '<thead>' +
                 '<tr>' +
                 '<th scope="col">#</th>' +
