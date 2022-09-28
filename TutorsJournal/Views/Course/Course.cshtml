@@ -276,6 +276,73 @@
     </div>
 </div>
 
+
+<!--info lesson-->
+<div class="modal fade" id="info_lesson">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Расширенные данные</h4>
+            </div>
+            <div class="modal-body">
+                <form name="info_lesson" action="#" method="post" onsubmit="return false">
+                    <input type="hidden" name="id" />
+                    <!--topic-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Тема</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="topic" disabled></textarea>
+                    </div>
+                    <!--task-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Задание</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="task" disabled></textarea>
+                    </div>
+                    <!--date-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Дата</span>
+                        </div>
+                        <input type="date" class="form-control" placeholder="" name="date" disabled>
+                    </div>
+                    <!--time-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Время</span>
+                        </div>
+                        <input type="time" class="form-control" placeholder="" name="time" disabled>
+                    </div>
+                    <!--price-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Cтоимость</span>
+                        </div>
+                        <input class="form-control" type="text" placeholder="" name="price" disabled>
+                    </div>
+
+                    <!--comment-->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Комментарий</span>
+                        </div>
+                        <textarea type="text" class="form-control" placeholder="" name="comment" disabled></textarea>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10" style="display: flex;">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts{
     <script src="~/js/Course/Courses.js"></script>
     <script src="~/js/Course/DeleteCourse.js"></script>

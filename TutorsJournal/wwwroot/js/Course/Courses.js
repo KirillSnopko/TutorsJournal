@@ -11,6 +11,7 @@ $(document).ready(function () {
         mapSub = new Map();
         mapGrade = new Map();
         mapTopics = new Map();
+        lessonsMap = new Map();
 
         $.get("Course/Courses?id=" + current_id_student, {},
             function (data) {
@@ -37,6 +38,7 @@ $(document).ready(function () {
                     if (lessons != null && lessons.length > 0) {
                         for (let x of lessons) {
                             mapLessons.set(x.id, x);
+                            lessonsMap.set(x.id, x);
                         }
                         console.log(mapLessons);
                         var size = 0;
@@ -47,9 +49,9 @@ $(document).ready(function () {
                                 size++;
                             }
                         });
-                        result = sum / size;
+                        result = Math.round(sum / size);
 
-                        lessons_table = '<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#lessons' + id + '" aria-expanded="false" >Уроки<span class="badge bg-secondary">' + mapLessons.size + 'шт</span></button>';
+                        lessons_table = '<br/><button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#lessons' + id + '" aria-expanded="false" >Уроки<span class="badge bg-secondary">' + mapLessons.size + 'шт</span></button>';
 
                         lessons_table += '<div class="collapse" id="lessons' + id + '">';
                         //lessons_table += lessonsList(mapLessons) + div2;
@@ -135,6 +137,24 @@ $(document).ready(function () {
                     $('textarea[name="comment"]', edit_lesson).val(comment);
                     $('input[name="date"]', edit_lesson).val(date);
                     $('input[name="time"]', edit_lesson).val(time);
+                });
+
+                $('.info_lesson').click(function (e) {
+                    var b = parseInt(e.target.getAttribute('data-value'));
+                    var lesson = lessonsMap.get(b);
+                    var task = lesson.task;
+                    var topic = lesson.topic;
+                    var comment = lesson.comment;
+                    var dateTime = moment(lesson.date);
+                    var date = new String(dateTime.format("YYYY-MM-DD"));
+                    console.log(date);
+                    var time = dateTime.format("HH:mm")
+                    $('textarea[name="topic"]', info_lesson).val(topic);
+                    $('textarea[name="task"]', info_lesson).val(task);
+                    $('textarea[name="comment"]', info_lesson).val(comment);
+                    $('input[name="date"]', info_lesson).val(date);
+                    $('input[name="time"]', info_lesson).val(time);
+                    $('input[name="price"]', info_lesson).val(lesson.price + 'BYN');
                 });
 
                 $('.del_lesson').click(function (e) {
@@ -270,16 +290,17 @@ $(document).ready(function () {
             var but_close = '<a class="dropdown-item close" data-value = "' + id + '">Закрыть</a>';
             var but_cancel = '<a class="dropdown-item cancel"  data-value = "' + id + '">Отменить</a>';
             var but_edit = '<a class="dropdown-item edit_lesson"  data-bs-toggle="modal" data-bs-target="#edit_lesson" data-value = "' + id + '" >Редактировать</a>';
+            var but_info = '<a class="dropdown-item info_lesson"  data-bs-toggle="modal" data-bs-target="#info_lesson" data-value = "' + id + '" >Дополнительно</a>';
             var ul_1 = ' <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton' + id + '">';
             var ul_2 = '</ul>';
 
             if (isCanceled || isEvaluated) {
-                return divDrop + ul_1 + but_del + ul_2 + div2;
+                return divDrop + ul_1 + but_info + but_del + ul_2 + div2;
             }
             if (isCompleted) {
-                return divDrop + ul_1 + but_evaluate + but_del + ul_2 + div2;
+                return divDrop + ul_1 + but_info + but_evaluate + but_del + ul_2 + div2;
             } else {
-                return divDrop + ul_1 + but_del + but_close + but_cancel + but_edit + ul_2 + div2;
+                return divDrop + ul_1 + but_info + but_del + but_close + but_cancel + but_edit + ul_2 + div2;
             }
         }
 
@@ -293,12 +314,9 @@ $(document).ready(function () {
                 '<thead>' +
                 '<tr>' +
                 '<th scope="col">#</th>' +
-                '<th scope="col">Тема</th>' +
                 '<th scope="col">Дата</th>' +
-                '<th scope="col">Задание</th>' +
+                '<th scope="col">Тема</th>' +
                 '<th scope="col">Результат</th>' +
-                '<th scope="col">BYN</th>' +
-                '<th scope="col">Комментарий</th>' +
                 '<th scope="col">Настройки</th>' +
                 '</tr>' +
                 '</thead>' +
@@ -322,14 +340,17 @@ $(document).ready(function () {
                 var date = moment(value.date);
                 moment.locale('ru');
                 str += '<th scope="row">' + x++ + '</th>' +
-                    '<td scope="col">' + value.topic + '</td>' +
                     '<td scope="col">' + date.format('DD.MM.YY HH-mm') + '</td>' +
-                    '<td scope="col">' + value.task + '</td>' +
-                    '<td scope="col">' + value.percentOfDecision + '%</td>' +
-                    '<td scope="col">' + value.price + '</td>' +
-                    '<td scope="col">' + value.comment + '</td>' +
-                    '<td scope="col">' + buttons + '</td>' +
-                    '</tr >';
+                    '<td scope="col">' + value.topic + '</td>';
+                if (value.percentOfDecision == 0 && !value.isEvaluated && !value.isCanceled) {
+                    str += '<td scope="col"><img src="/image/timer.png" alt="pending review"></td>';
+                } else if (value.isCanceled) {
+                    str += '<td scope="col"><img src="/image/fail.png" height="40" width="40" alt="fail"></td>';
+                }
+                else {
+                    str += '<td scope="col">' + value.percentOfDecision + '%</td>';
+                }
+                str += '<td scope="col">' + buttons + '</td>' + '</tr >';
             });
 
             str += '</tbody>' + '</table>';
