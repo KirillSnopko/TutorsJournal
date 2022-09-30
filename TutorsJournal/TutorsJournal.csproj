@@ -6,10 +6,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>29fcf43e-ab29-42a6-bd72-aeb165b631a7</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <PackageIcon>journal.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\Index.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\image\journal.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
