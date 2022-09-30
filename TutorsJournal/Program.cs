@@ -8,12 +8,15 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+#region SQlServer context
 //builder.Services.AddDbContext<ApplicationContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultContext")));
+#endregion
 
+#region MySQL context
 builder.Services.AddDbContext<ApplicationContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("MySQLContext"), new MySqlServerVersion(new Version(8, 0, 13))));
+#endregion
 
 #region Repositories
 builder.Services.AddTransient<ISubjectRepo, SubjectRepo>();
