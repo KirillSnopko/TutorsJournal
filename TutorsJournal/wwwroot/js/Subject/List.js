@@ -12,12 +12,12 @@
                 mapTop = new Map();
                 var idGroup = 0;
                 $(credits).each(function (index, item) {
-                    var content = '<div class="card text-center">';
+                    var content = '<div class="card text-center text-white bg-dark border-primary">';
                     var id = item.id;
                     var name = item.name;
                     mapSub.set(id, name);
                     content += '<div class="card-header">' + '<ul class="nav nav-pills card-header-pills">' + subjectSettings(id) + ul2 + div2;
-                    content += '<div class="card-body">' + '<h5 class="card-title fs-3 ">' + name + '</h5> ';
+                    content += '<div class="card-body bg-secondary">' + '<h5 class="card-title fs-3 ">' + name + '</h5> ';
 
                     var topics = item.topics;
                     if (topics != null) {
@@ -133,7 +133,7 @@
         }
 
         function search(idGroup) {
-            return str = '<input id="myInput' + idGroup + '" type="text" placeholder="Поиск.." class="form-control">';
+            return str = '<input id="myInput' + idGroup + '" type="text" placeholder="Поиск.." class="form-control bg-light">';
         }
     });
 });

@@ -3,7 +3,7 @@
     $(window).on('load', function () {
         $.get("/Student/GetData", {},
             function (data) {
-                var table = $('<table class="table table-striped"><tr><th>#</th><th>Имя</th><th>Возраст</th><th>Класс</th><th>Местоположение</th><th>Мобильный</th><th>Имя родителя</th><th>Мобильный родителя</th><th></th></tr>');
+                var table = $('<table class="table table-striped table-dark table-bordered"><tr><th>#</th><th>Имя</th><th>Возраст</th><th>Класс</th><th>Местоположение</th><th>Мобильный</th><th>Имя родителя</th><th>Мобильный родителя</th><th></th></tr>');
                 var i = 1;
                 var students = new Map();
                 $(data).each(function (index, item) {

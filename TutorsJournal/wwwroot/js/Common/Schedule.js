@@ -5,7 +5,7 @@
 
             $.get("/Course/Schedule", {},
                 function (data) {
-                    var table = $('<table class="table"><tr><th>Дата</th><th>Предмет</th><th>Ученик</th></tr>');
+                    var table = $('<table class="table table-striped table-dark table-bordered"><tr><th>Дата</th><th>Предмет</th><th>Ученик</th></tr>');
                     $(data).each(function (index, item) {
                         moment.locale('ru');
                         var date = moment(item.date);

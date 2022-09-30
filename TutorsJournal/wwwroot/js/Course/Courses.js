@@ -17,7 +17,7 @@ $(document).ready(function () {
             function (data) {
 
                 $(data).each(function (index, item) {
-                    var content = '<div class="card text-center">';
+                    var content = '<div class="card text-center  text-white bg-dark border-primary">';
                     var id = item.id;
                     var subjectId = item.subjectId;
                     var subject = item.subject;
@@ -31,7 +31,7 @@ $(document).ready(function () {
 
                     content += '<div class="card-header">' +
                         '<ul class="nav nav-pills card-header-pills">' + courseSettings(id, subjectId) + ul2 + div2;
-                    content += '<div class="card-body ">' + '<h5 class="card-title fs-3 ">' + subject + '</h5>' + ' <span class="badge rounded-pill bg-danger">' + grade + 'класс</span>' + '<span class="badge rounded-pill bg-success">' + initPrice + 'BYN</span>';
+                    content += '<div class="card-body bg-secondary">' + '<h5 class="card-title fs-3 ">' + subject + '</h5>' + ' <span class="badge rounded-pill bg-danger">' + grade + 'класс</span>' + '<span class="badge rounded-pill bg-success">' + initPrice + 'BYN</span>';
                     var lessons_table = new String();
                     var result = 0;
                     mapLessons = new Map();
