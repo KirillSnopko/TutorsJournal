@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using TutorsJournal.entity;
@@ -17,7 +18,7 @@ namespace TutorsJournal.Controllers
         public IActionResult Excel(int idCourse)
         {
             Course course = courseService.getById(idCourse);
-            List<Lesson> lessons = course.Lessons.Where(i => i.Date.Month == DateTime.Now.Month).Where(i => i.IsCompleted == true).ToList();
+            List<Lesson> lessons = course.Lessons.OrderBy(i => i.Date).ToList(); //.Where(i => i.Date.Month == DateTime.Now.Month).Where(i => i.IsCompleted == true).ToList();
             if (lessons != null && lessons.Count > 0)
             {
                 using (XLWorkbook wb = new XLWorkbook())
@@ -36,11 +37,40 @@ namespace TutorsJournal.Controllers
                     foreach (Lesson x in lessons)
                     {
                         int w = 1;
-                        workSheet.Cell(h, w++).Value = x.Date;
-                        workSheet.Cell(h, w++).Value = x.PercentOfDecision;
-                        workSheet.Cell(h, w++).Value = x.Topic;
+                        if (x.IsCompleted == true)
+                        {
+                            workSheet.Cell(h, w).Style.Fill.SetBackgroundColor(XLColor.Green);
+                            workSheet.Cell(h, w++).Value = x.Date;
+                            if (x.isEvaluated == true)
+                            {
+                                workSheet.Cell(h, w++).Value = x.PercentOfDecision;
+                            }
+                            else
+                            {
+                                workSheet.Cell(h, w++).Value = "pending review";
+                            }
+
+                            workSheet.Cell(h, w++).Value = x.Topic;
+
+                        }
+                        else if (x.isCanceled == true)
+                        {
+                            workSheet.Cell(h, w).Style.Fill.SetBackgroundColor(XLColor.Red);
+                            workSheet.Cell(h, w++).Value = x.Date;
+                            workSheet.Cell(h, w++).Value = "null";
+                            workSheet.Cell(h, w++).Value = x.Topic;
+
+                        }
+                        else
+                        {
+                            workSheet.Cell(h, w++).Value = x.Date;
+                            workSheet.Cell(h, w++).Value = "planned";
+                            workSheet.Cell(h, w++).Value = x.Topic;
+                        }
                         h++;
                     }
+
+
 
                     var rngTable = workSheet.Range("A1:C" + (2 + lessons.Count));
 
@@ -65,6 +95,9 @@ namespace TutorsJournal.Controllers
                     // Put a label on the totals cell of the field "DOB"
                     excelTable.Field("Дата").TotalsRowLabel = "Среднее:";
 
+
+                    workSheet.Cell(lessons.Count + 3, 1).Style.Fill.SetBackgroundColor(XLColor.RichLilac);
+
                     workSheet.RangeUsed().Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
                     workSheet.Columns().AdjustToContents();
 
@@ -75,7 +108,7 @@ namespace TutorsJournal.Controllers
                     }
                 }
             }
-            else return Json(new {message = "список занятий пустой"});
+            else return Json(new { message = "List of lessons is empty" });
         }
     }
 }

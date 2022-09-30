@@ -342,10 +342,13 @@ $(document).ready(function () {
                 str += '<th scope="row">' + x++ + '</th>' +
                     '<td scope="col">' + date.format('DD.MM.YY HH-mm') + '</td>' +
                     '<td scope="col">' + value.topic + '</td>';
-                if (value.percentOfDecision == 0 && !value.isEvaluated && !value.isCanceled) {
+                if (value.isCompleted && !value.isEvaluated) {
                     str += '<td scope="col"><img src="/image/timer.png" alt="pending review"></td>';
                 } else if (value.isCanceled) {
                     str += '<td scope="col"><img src="/image/fail.png" height="40" width="40" alt="fail"></td>';
+                }
+                else if (!value.isCanceled && !value.isCompleted) {
+                    str += '<td scope="col"><img src="/image/planned.png" height="40" width="40" alt="fail"></td>';
                 }
                 else {
                     str += '<td scope="col">' + value.percentOfDecision + '%</td>';
