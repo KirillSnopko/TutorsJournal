@@ -18,7 +18,7 @@ namespace TutorsJournal.Controllers
         public IActionResult Excel(int idCourse)
         {
             Course course = courseService.getById(idCourse);
-            List<Lesson> lessons = course.Lessons.OrderBy(i => i.Date).ToList(); //.Where(i => i.Date.Month == DateTime.Now.Month).Where(i => i.IsCompleted == true).ToList();
+            List<Lesson> lessons = course.Lessons.OrderBy(i => i.Date).ToList(); 
             if (lessons != null && lessons.Count > 0)
             {
                 using (XLWorkbook wb = new XLWorkbook())
