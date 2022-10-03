@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <_ContentIncludedByDefault Remove="wwwroot\Index.html" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\image\journal.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>

@@ -32,9 +32,11 @@ builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<ICourseService, CourceService>();
 #endregion
 
+#region Controller
 builder.Services.AddControllersWithViews();
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+#endregion
 
 
 var app = builder.Build();
@@ -43,18 +45,12 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // The default HSTS value is 30 days. 
     app.UseHsts();
 }
-//app.UseDefaultFiles();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
-
 app.UseRouting();
-
-
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Subject}/{action=Index}/{id?}");
