@@ -5,16 +5,16 @@
         Журнал
     </title>
 
-    <link rel="icon" type="image/x-icon" href="/image/journal.png">
+    <link rel="icon" type="image/x-icon" href= "@Url.Content("~/image/journal.png")">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="@Url.Content("~/lib/bootstrap/dist/css/bootstrap.min.css")">
 
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/popper/umd/popper.min.js"></script>
-    <script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/lib/moment.js/moment-with-locales.min.js"></script>
+    <script src='@Url.Content("~/lib/jquery/dist/jquery.min.js")'></script>
+    <script src='@Url.Content("~/lib/popper/umd/popper.min.js")'></script>
+    <script src='@Url.Content("~/lib/bootstrap/dist/js/bootstrap.min.js")'></script>
+    <script src='@Url.Content("~/lib/moment.js/moment-with-locales.min.js")'></script>
 
 
 
@@ -53,7 +53,7 @@
         <nav class="navbar navbar-dark bg-dark ">
             <div class="container-fluid">
                 <a class="navbar-brand">
-                    <img src="/image/journal.png" height="40" width="40" alt="fail">
+                    <img src="@Url.Content("~/image/journal.png")" height="40" width="40" alt="fail">
                     Журнал
                 </a>
                 <div class="dropdown dropstart d-flex">
@@ -63,7 +63,7 @@
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item position-relative" href="~/Student/">
-                                <img src="/image/student.png" height="30" width="30" alt="fail">
+                                <img src="@Url.Content("~/image/student.png")" height="30" width="30" alt="fail">
                                 Ученики
                                 <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill bg-success" id="student_count">
                                 </span>
@@ -71,7 +71,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item position-relative" href="/">
-                                <img src="/image/subject.png" height="30" width="30" alt="fail">
+                                <img src="@Url.Content("~/image/subject.png")" height="30" width="30" alt="fail">
                                 Предметы
                                 <span class="position-absolute top-4 start-90 translate-middle badge rounded-pill bg-success" id="subject_count">
                                 </span>
@@ -79,7 +79,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item" href="#" id="button_schedule" data-bs-toggle="modal" data-bs-target="#lessons_schedule">
-                                <img src="/image/planned.png" height="30" width="30" alt="fail">
+                                <img src="@Url.Content("~/image/planned.png")" height="30" width="30" alt="fail">
                                 План занятий
                             </a>
                         </li>
@@ -89,7 +89,7 @@
         </nav>
     </header>
     <div class="bg-image"
-         style="background-image: url('/image/back.webp');
+         style="background-image: url('@Url.Content("~/image/back.webp")');
            background-repeat: round;
             height: 100vh">
 
@@ -115,8 +115,8 @@
     @RenderSection("Scripts", required: false)
 
 
-    <script src="~/js/Common/Counts.js"></script>
-    <script src="~/js/Common/Schedule.js"></script>
+    <script src=@Url.Content("~/js/Common/Counts.js")></script>
+    <script src=@Url.Content("~/js/Common/Schedule.js")></script>
 
 
     <div class="modal fade " id="lessons_schedule">

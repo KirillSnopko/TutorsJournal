@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region MySQL context
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("MySQLContext"), new MySqlServerVersion(new Version(8, 0, 13))));
+    options.UseMySql(builder.Configuration.GetConnectionString("MySQLTest"), new MySqlServerVersion(new Version(8, 0, 30))));
 #endregion
 
 #region Repositories
