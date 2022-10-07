@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TutorsJournal.entity;
 using TutorsJournal.Service.iFace;
 
 namespace TutorsJournal.Controllers
@@ -22,6 +23,17 @@ namespace TutorsJournal.Controllers
         {
             var data = studentService.GetAllStudents();
             return Json(data);
+        }
+
+        [HttpGet]
+        public IActionResult GetStudentById(int id)
+        {
+            Student student = studentService.GetStudent(id);
+            if (student == null)
+            {
+                return NotFound();
+            }
+            return Json(student);
         }
 
         [HttpGet]

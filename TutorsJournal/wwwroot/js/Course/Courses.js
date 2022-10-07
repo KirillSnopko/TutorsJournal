@@ -13,6 +13,15 @@ $(document).ready(function () {
         mapTopics = new Map();
         lessonsMap = new Map();
 
+        $.get("Student/GetStudentById?id=" + current_id_student, {},
+            function (data) {
+                var name = data.name;
+                var age = data.age;
+                var location = data.location;
+                $('#student_info').html('<button type="button" class="btn btn-outline-warning btn-lg disabled">' + name + ', ' + age + 'лет</button>');
+            });
+
+
         $.get("Course/Courses?id=" + current_id_student, {},
             function (data) {
 
