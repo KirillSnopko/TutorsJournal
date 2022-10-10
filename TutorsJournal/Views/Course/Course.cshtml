@@ -69,7 +69,10 @@
                 <form name="create_lesson" action="#" method="post" onsubmit="return false">
                     @Html.AntiForgeryToken()
                     <input type="hidden" name="id" id="idCourse" />
-                    <div id="select_topic"></div>
+                    <div class="input-group mb-3" id="select_topic">
+                        
+                    </div>
+
                     <input class="form-control" type="text" placeholder="" id="cur_price" name="price" disabled>
 
                     <!--task-->

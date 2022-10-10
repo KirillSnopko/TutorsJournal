@@ -92,22 +92,32 @@ $(document).ready(function () {
                     $('#idCourse').val(courseid);
                     $('#cur_price').val(mapCourses.get(courseid).initPrice + 'BYN');
 
-                    var selectTopic = new String();
+                    var selectTopic = '<div class="input-group-text">Темы</div> ';
 
                     $.get("Subject/GetTopics?idSubject=" + subjectId + '&grade=' + mapCourses.get(courseid).gradeLevel, {}, function (date) {
                         var topics = date.topics;
                         console.log(date);
-                        selectTopic += '<select class= "form-select form-select-sm" aria - label=".form-select-lg example" name="topic" >';
-                        selectTopic += ' <option value="" selected>Выберите тему</option>';
+                        selectTopic += '<select class="select_topic form-select" name="topic" data-placeholder="Выбери тему" multiple>';
+
                         if (topics != null) {
                             for (let x of topics) {
                                 console.log(x.description);
                                 selectTopic += '<option value="' + x.description + '">' + x.description + '</option>';
                             }
                         }
-                        selectTopic += '</select >';
-                        console.log(selectTopic);
+                        selectTopic += '</select>';
+
+
                         $('#select_topic').html(selectTopic);
+
+                        $('.select_topic').select2({
+                            theme: 'bootstrap-5',
+                            width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                            closeOnSelect: false,
+                            selectionCssClass: "select2--small",
+                            dropdownCssClass: "select2--small",
+                            language: "ru"
+                        });
                     });
                 });
 

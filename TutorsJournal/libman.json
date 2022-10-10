@@ -19,6 +19,14 @@
     {
       "library": "moment.js@2.29.4",
       "destination": "wwwroot/lib/moment.js/"
+    },
+    {
+      "library": "select2@4.0.13",
+      "destination": "wwwroot/lib/select2/"
+    },
+    {
+      "library": "select2-bootstrap-5-theme@1.3.0",
+      "destination": "wwwroot/lib/select2/select2-bootstrap-5-theme/"
     }
   ]
 }

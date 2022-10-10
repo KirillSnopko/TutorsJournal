@@ -3,7 +3,7 @@
 
         $("#button_create_lesson").click(function () {
             var courseId = document.create_lesson.id;
-            var topic = document.create_lesson.topic;
+            var topic = $('.select_topic').select2('data');
             var price = $('#cur_price').val().split('BYN')[0];
             var task = document.create_lesson.task;
             var date = document.create_lesson.date;
@@ -11,7 +11,7 @@
             var comment = document.create_lesson.comment;
             var token = $('input[name="__RequestVerificationToken"]', create_lesson).val();
 
-            if (topic.value == null || topic.value.trim() == "") {
+            if (topic.length == 0 ) {
                 document.getElementById('err_create_lesson').innerHTML = "Выберите или создайте тему";
                 topic.focus();
             } else if (task.value == null || task.value.trim() == "") {
@@ -28,10 +28,16 @@
                 $('textarea[name="comment"]', create_lesson).val("Без комментариев");
                 comment.focus();
             } else {
+                var topics = new String();
+                topic.forEach(function (currentValue, index, arr) {
+                    topics += currentValue.text;
+                    topics += ', ';
+                });
+
                 $.post("../Course/CreateLesson",
                     {
                         courseId: courseId.value,
-                        topic: topic.value,
+                        topic: topics,
                         price: price,
                         date: date.value,
                         time:time.value,

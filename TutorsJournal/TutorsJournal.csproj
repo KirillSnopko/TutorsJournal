@@ -10,6 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\bootstrap-select\**" />
+    <Compile Remove="wwwroot\lib\jquery-ui-multiselect-widget\**" />
+    <Content Remove="wwwroot\lib\bootstrap-select\**" />
+    <Content Remove="wwwroot\lib\jquery-ui-multiselect-widget\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap-select\**" />
+    <EmbeddedResource Remove="wwwroot\lib\jquery-ui-multiselect-widget\**" />
+    <None Remove="wwwroot\lib\bootstrap-select\**" />
+    <None Remove="wwwroot\lib\jquery-ui-multiselect-widget\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\image\journal.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -17,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="bootstrap-select" Version="1.13.18" />
     <PackageReference Include="ClosedXML" Version="0.96.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
