@@ -12,7 +12,6 @@
             console.log(subjectId.val());
             console.log(grade.val());
 
-
             if (subjectId == null || subjectId.val().trim() == "" || subjectId.val() == "undefined" || isNaN(subjectId.val())) {
                 document.getElementById('err_create_course').innerHTML = "Выберите предмет либо создайте";
                 subjectId.focus();
@@ -26,7 +25,6 @@
                 document.getElementById('err_create_course').innerHTML = "Введите цель";
                 goals.focus();
             } else {
-
                 $.post("../Course/CreateCourse",
                     {
                         subjectId: subjectId.val(),
@@ -42,8 +40,7 @@
                         } else {
                             document.getElementById('err_create_course').innerHTML = "Server error" + "\nStatus: " + status['status'] + "\nMessage: " + status['message'];
                         }
-                    }
-                );
+                });
             }
         });
     });

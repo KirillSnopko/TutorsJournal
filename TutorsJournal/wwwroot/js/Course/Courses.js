@@ -13,12 +13,20 @@ $(document).ready(function () {
         mapTopics = new Map();
         lessonsMap = new Map();
 
+        info();
+
         $.get("Student/GetStudentById?id=" + current_id_student, {},
             function (data) {
                 var name = data.name;
                 var age = data.age;
                 var location = data.location;
-                $('#student_info').html('<button type="button" class="btn btn-outline-warning btn-lg disabled">' + name + ', ' + age + 'лет</button>');
+                var phoneNumber = data.studentMobile;
+                var content = '<div class="position-absolute text-start" >';
+                content += '<p class="text-white"> <img src="/image/student.png" height="30" width="30" alt="fail">' + name + ', ' + age + 'лет</p>';
+                content += '<p class="text-white"> <img src="/image/location.png" height="30" width="30" alt="fail">' + location + '</p>';
+                content += '<p class="text-white"> <img src="/image/phone.png" height="30" width="30" alt="fail">' + phoneNumber + '</p></div>';
+
+                $('#left_content').html(content);
             });
 
         $.get("Course/Courses?id=" + current_id_student, {},
@@ -284,7 +292,7 @@ $(document).ready(function () {
                     $('#select_grade').html('<span class="badge rounded-pill bg-warning text-dark">Список классов пустой</span>');
                 }
             });
-                     
+
 
             $("[id^='myInput']").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
@@ -375,7 +383,7 @@ $(document).ready(function () {
                     '<td scope="col">' + date.format('DD.MM.YY HH-mm') + '</td>' +
                     '<td scope="col">' + value.topic + '</td>';
                 if (value.isCompleted && !value.isEvaluated) {
-                    str += '<td scope="col"><img src="/image/timer.png" alt="pending review"></td>';
+                    str += '<td scope="col"><img src="/image/timer.png" alt="pending review" height="40" width="40"></td>';
                 } else if (value.isCanceled) {
                     str += '<td scope="col"><img src="/image/fail.png" height="40" width="40" alt="fail"></td>';
                 }
@@ -390,6 +398,15 @@ $(document).ready(function () {
 
             str += '</tbody>' + '</table>';
             return str;
+        }
+
+        function info() {
+            var content = '<div class="position-absolute text-start" >';
+            content += '<p class="text-white"> <img src="/image/timer.png" alt="pending review" height="30" width="30"> - Ожидает оценки </p>';
+            content += '<p class="text-white"> <img src="/image/fail.png" alt="pending review" height="30" width="30"> - Занятие отменено </p>';
+            content += '<p class="text-white"> <img src="/image/planned.png" alt="pending review" height="30" width="30"> - Запланированное занятие </p></div>';
+
+            $('#right_content').html(content);
         }
     });
 });
