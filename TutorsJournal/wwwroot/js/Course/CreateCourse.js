@@ -3,16 +3,20 @@
 
         $("#button_create_course").click(function () {
             var studentId = document.create.id;
-            var subjectId = document.querySelector('input[name="subject"]:checked');
-            var grade = document.create.grade;
+            var subjectId = $('#check_subject');
+            var grade = $('#check_grade');
             var initPrice = document.create.initPrice;
             var goals = document.create.goals;
             var token = $('input[name="__RequestVerificationToken"]', create).val();
 
-            if (subjectId == null || subjectId.value.trim() == "") {
+            console.log(subjectId.val());
+            console.log(grade.val());
+
+
+            if (subjectId == null || subjectId.val().trim() == "" || subjectId.val() == "undefined" || isNaN(subjectId.val())) {
                 document.getElementById('err_create_course').innerHTML = "Выберите предмет либо создайте";
                 subjectId.focus();
-            } else if (grade == null || isNaN(parseInt(grade.value)) || grade.value <= 0 || grade.value.trim() == "") {
+            } else if (grade == null || isNaN(parseInt(grade.val())) || grade.val() <= 0 || grade.val().trim() == "") {
                 document.getElementById('err_create_course').innerHTML = "Выберите класс либо создайте";
                 grade.focus();
             } else if (isNaN(parseInt(initPrice.value)) || initPrice.value < 0 || initPrice.value.trim() == "") {
@@ -25,9 +29,9 @@
 
                 $.post("../Course/CreateCourse",
                     {
-                        subjectId: subjectId.value,
+                        subjectId: subjectId.val(),
                         studentId: studentId.value,
-                        gradeLevel: grade.value,
+                        gradeLevel: grade.val(),
                         initPrice: initPrice.value,
                         goals: goals.value,
                         __RequestVerificationToken: token

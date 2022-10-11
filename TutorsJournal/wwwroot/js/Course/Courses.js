@@ -21,7 +21,6 @@ $(document).ready(function () {
                 $('#student_info').html('<button type="button" class="btn btn-outline-warning btn-lg disabled">' + name + ', ' + age + 'лет</button>');
             });
 
-
         $.get("Course/Courses?id=" + current_id_student, {},
             function (data) {
 
@@ -198,6 +197,7 @@ $(document).ready(function () {
                             }
                         });
                 });
+
                 $('.cancel').click(function (e) {
                     var b = parseInt(e.target.getAttribute('data-value'));
                     $.post("/Course/CancelLesson", { id: b },
@@ -209,6 +209,7 @@ $(document).ready(function () {
                             }
                         });
                 });
+
                 $(".excel").click(function (e) {
                     var id = parseInt(e.target.getAttribute('data-value'));
                     window.open("/Export/Excel?idCourse=" + id);
@@ -245,32 +246,45 @@ $(document).ready(function () {
                 }
                 mapSub.set(id, name);
             });
-            console.log(mapTopics);
-            var selectSubject = new String();
+
+            var subjectSelection = '<div class="input-group-text">Предметы</div> ';
+            subjectSelection += '<select class="select_subject form-select" id="check_subject" name="subject" data-placeholder="Выбери предмет">';
+            subjectSelection += ' <option selected>Выберите предмет</option>';
+
             mapSub.forEach((value, key) => {
-                selectSubject += '<form-check form-check-inline float-start">' +
-                    '<input type="radio" class="form-check-input select" id="subject_select' + key + '" name="subject" value="' + key + '">' +
-                    '<label class="form-check-label" for="subject_select' + key + '">' + value + '</label></div><br />'
-
+                subjectSelection += '<option value="' + key + '">' + value + '</option>';
             });
-            $('#select_subject').html(selectSubject);
+            subjectSelection += '</select>';
+            $('.select_subject').select2({
+                theme: 'bootstrap-5',
+                closeOnSelect: false,
+                selectionCssClass: "select2--small",
+                dropdownCssClass: "select2--small",
+                language: "ru"
+            });
 
-            $("[id^='subject_select']").click(function (e) {
+            $('#select_subject').html(subjectSelection);
+
+            $('#check_subject').change(function (e) {
                 $('#select_grade').html('');
-                var id = this.id.split('subject_select')[1];
-                var selectGrade = new String();
-                selectGrade += '<select class= "form-select form-select-sm" aria - label=".form-select-lg example" name="grade" >';
-                selectGrade += ' <option selected>Выберите класс</option>';
+
+                var id = $(this).val();
                 var arr = mapGrade.get(parseInt(id));
+                if (arr != null) {
 
-                for (let x of arr) {
-                    selectGrade += ' <option value="' + x + '">' + x + 'класс' + '</option>';
+                    var selectGrade = '<div class="input-group-text">Класс</div> ';
+                    selectGrade += '<select class= "form-select form-select-sm" aria - label=".form-select-lg example" id="check_grade" name="grade" >';
+                    selectGrade += ' <option selected>Выберите класс</option>';
+                    for (let x of arr) {
+                        selectGrade += ' <option value="' + x + '">' + x + 'класс' + '</option>';
+                    }
+                    selectGrade += '</select >';
+                    $('#select_grade').html(selectGrade);
+                } else {
+                    $('#select_grade').html('<span class="badge rounded-pill bg-warning text-dark">Список классов пустой</span>');
                 }
-
-                selectGrade += '</select >';
-
-                $('#select_grade').html(selectGrade);
             });
+                     
 
             $("[id^='myInput']").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
