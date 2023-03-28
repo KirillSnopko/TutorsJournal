@@ -2,7 +2,7 @@
 
 namespace TutorsJournal.Service.iFace
 {
-    public interface IStudentService
+    public interface ICrudService
     {
         void createNewStudent(
             string Name,

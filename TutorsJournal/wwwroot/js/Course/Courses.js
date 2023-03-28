@@ -22,9 +22,9 @@ $(document).ready(function () {
                 var location = data.location;
                 var phoneNumber = data.studentMobile;
                 var content = '<div class="position-absolute text-start" >';
-                content += '<p class="text-white"> <img src="/image/student.png" height="30" width="30" alt="fail">' + name + ', ' + age + 'лет</p>';
-                content += '<p class="text-white"> <img src="/image/location.png" height="30" width="30" alt="fail">' + location + '</p>';
-                content += '<p class="text-white"> <img src="/image/phone.png" height="30" width="30" alt="fail">' + phoneNumber + '</p></div>';
+                content += '<p> <img src="/image/student.png" height="30" width="30" alt="fail">' + name + ', ' + age + 'лет</p>';
+                content += '<p> <img src="/image/location.png" height="30" width="30" alt="fail">' + location + '</p>';
+                content += '<p> <img src="/image/phone.png" height="30" width="30" alt="fail">' + phoneNumber + '</p></div>';
 
                 $('#left_content').html(content);
             });

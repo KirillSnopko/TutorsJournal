@@ -1,57 +1,56 @@
-﻿using TutorsJournal.entity;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.EntityFrameworkCore;
+using TutorsJournal.database;
+using TutorsJournal.entity;
 using TutorsJournal.Repo.iFace;
 using TutorsJournal.Service.iFace;
 
 namespace TutorsJournal.Service
 {
-    public class StudentService : IStudentService
+    public class StudentService : ICrudService<Student>
     {
-        private IStudentRepo studentRepo;
-        public StudentService(IStudentRepo studentRepo)
+        private readonly ApplicationContext applicationContext;
+
+        public StudentService(ApplicationContext applicationContext)
         {
-            this.studentRepo = studentRepo;
-        }
-        public void createNewStudent(string Name, int Age, int GradeLevel, string Location, string ParentName, string StudentMobile, string ParentsMobile)
-        {
-            Student student = new Student { Name = Name, Age = Age, Location = Location, ParentName = ParentName, GradeLevel = GradeLevel, ParentsMobile = ParentsMobile, StudentMobile = StudentMobile };
-            studentRepo.add(student);
+            this.applicationContext = applicationContext;
         }
 
-        public void deleteStudent(int idStudent)
+        public void Add(Student student)
         {
-            studentRepo.delete(idStudent);
+            applicationContext.students.Add(student);
+            applicationContext.SaveChanges();
         }
 
-        public dynamic GetAllStudents()
+        public void Delete(int idStudent)
         {
-            return studentRepo.getStudents()
-                .Select(i => new
-                {
-                    id = i.Id,
-                    name = i.Name,
-                    gradeLevel = i.GradeLevel,
-                    age = i.Age,
-                    location = i.Location,
-                    parent = i.ParentName,
-                    mob1 = i.StudentMobile,
-                    mob2 = i.ParentsMobile
-                }).ToList();
+            applicationContext.students.Remove(applicationContext.students.First(i => i.Id == idStudent));
+            applicationContext.SaveChanges();
         }
 
-        public Student GetStudent(int idStudent)
+        public List<Student> Get()
         {
-            return studentRepo.get(idStudent);
+            return applicationContext.students.AsNoTracking().ToList();
         }
 
-        public int GetStudentCount()
+        public Student Get(int idStudent)
         {
-            return studentRepo.getStudents().Count();
+            return applicationContext.students.AsNoTracking().First(i => i.Id == idStudent);
         }
 
-        public void updateStudent(int id, string Name, int Age, int GradeLevel, string Location, string ParentName, string StudentMobile, string ParentsMobile)
+        public int Count()
         {
-            Student student = new Student { Id = id, Name = Name, Age = Age, Location = Location, ParentName = ParentName, GradeLevel = GradeLevel, ParentsMobile = ParentsMobile, StudentMobile = StudentMobile };
-            studentRepo.update(student);
+            return applicationContext.students.AsNoTracking().Count();
+        }
+
+        public void Update(Student student)
+        {
+            Student current = applicationContext.students.First(i => i.Id == student.Id);
+            if (current != null)
+            {
+                current.Update(student);
+                applicationContext.SaveChanges();
+            }
         }
     }
 }

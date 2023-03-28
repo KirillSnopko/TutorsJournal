@@ -6,29 +6,22 @@ namespace TutorsJournal.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly IStudentService studentService;
+        private readonly ICrudService<Student> service;
 
-        public StudentController(IStudentService studentService)
+        public StudentController(ICrudService<Student> studentService)
         {
-            this.studentService = studentService;
+            this.service = studentService;
         }
 
-        public IActionResult Index()
-        {
-            return View("Students");
-        }
+        public IActionResult Index() => View("Students");
 
         [HttpGet]
-        public IActionResult GetData()
-        {
-            var data = studentService.GetAllStudents();
-            return Json(data);
-        }
+        public IActionResult GetData() => Json(service.Get());
 
         [HttpGet]
         public IActionResult GetStudentById(int id)
         {
-            Student student = studentService.GetStudent(id);
+            Student student = service.Get(id);
             if (student == null)
             {
                 return NotFound();
@@ -37,24 +30,21 @@ namespace TutorsJournal.Controllers
         }
 
         [HttpGet]
-        public IActionResult Count()
-        {
-            return Json(new { count = studentService.GetStudentCount() });
-        }
+        public IActionResult Count() => Json(new { count = service.Count() });
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateStudent(string name, int age, int gradeLevel, string location, string parentName, string studentMobile, string parentMobile)
+        public IActionResult CreateStudent(Student student)
         {
-            studentService.createNewStudent(name, age, gradeLevel, location, parentName, studentMobile, parentMobile);
+            service.Add(student);
             return Json(new { status = "200" });
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult ChangeStudent(int id, string name, int age, int gradeLevel, string location, string parentName, string studentMobile, string parentMobile)
+        public IActionResult ChangeStudent(Student student)
         {
-            studentService.updateStudent(id, name, age, gradeLevel, location, parentName, studentMobile, parentMobile);
+            service.Update(student);
             return Json(new { status = "200" });
         }
 
@@ -62,7 +52,7 @@ namespace TutorsJournal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult DeleteStudent(int id)
         {
-            studentService.deleteStudent(id);
+            service.Delete(id);
             return Json(new { status = "200" });
         }
     }

@@ -5,6 +5,7 @@ using TutorsJournal.Repo;
 using TutorsJournal.Service.iFace;
 using TutorsJournal.Service;
 using System.Text.Json.Serialization;
+using TutorsJournal.entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,20 +16,19 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region MySQL context
 builder.Services.AddDbContext<ApplicationContext>(options =>
-    options.UseMySql(builder.Configuration.GetConnectionString("MySQLWork"), new MySqlServerVersion(new Version(8, 0, 30))));
+    options.UseMySql(builder.Configuration.GetConnectionString("MySQLKirill"), new MySqlServerVersion(new Version(8, 0, 30))));
 #endregion
 
 #region Repositories
 builder.Services.AddTransient<ISubjectRepo, SubjectRepo>();
 builder.Services.AddTransient<ITopicRepo, TopicRepo>();
-builder.Services.AddTransient<IStudentRepo, StudentRepo>();
 builder.Services.AddTransient<ICourseRepo, CourseRepo>();
 builder.Services.AddTransient<ILessonRepo, LessonRepo>();
 #endregion
 
 #region Services
 builder.Services.AddScoped<ISubjectService, SubjectService>();
-builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<ICrudService<Student>, StudentService>();
 builder.Services.AddScoped<ICourseService, CourceService>();
 #endregion
 
